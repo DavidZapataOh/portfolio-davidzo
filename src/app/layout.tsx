@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Archivo, JetBrains_Mono } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const display = Anton({

@@ -55,7 +55,7 @@ Secondary differentiator: David teaches (university chair, workshops, community 
 
 **Stack:** Next.js 16 (App Router, `src/`), React 19, TypeScript, Tailwind 4, ESLint. Scroll journey planned with GSAP ScrollTrigger (pinned sections) and Lenis; this is a build decision, not a product one.
 
-**Undecided:** hosting/deploy target for davidzo.com; exact list of hackathons, courses and certificates to show; which passions get photographs; whether Strickle moves to a custom domain.
+**Undecided:** hosting/deploy target for davidzo.com; exact list of hackathons, courses and certificates to show; which passions get photographs; pointing strickle.xyz at the Strickle deployment.
 
 ## Brand Commitments
 

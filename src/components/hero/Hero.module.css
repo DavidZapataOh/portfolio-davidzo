@@ -8,11 +8,16 @@
 }
 
 /* The print develops once: from near-black to its true tones. */
+.plate {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  animation: develop 1.6s var(--ease-out) both;
+}
+
 .photo {
   object-fit: cover;
   object-position: right center;
-  z-index: 0;
-  animation: develop 1.6s var(--ease-out) both;
 }
 
 @keyframes develop {
@@ -150,7 +155,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .photo,
+  .plate,
   .copy {
     animation: none;
   }

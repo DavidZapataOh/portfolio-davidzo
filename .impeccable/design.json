@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-13T00:00:00Z",
+  "generatedAt": "2026-09-14T00:00:00Z",
   "title": "Design System: David Zapata",
   "extensions": {
     "colorMeta": {
@@ -66,7 +66,7 @@
       },
       "white-hover": {
         "role": "neutral",
-        "displayName": "Pure White (hover state only)",
+        "displayName": "Pure White (hover state only: nav, index rows, [ Visit ])",
         "canonical": "#ffffff",
         "tonalRamp": [
           "oklch(15% 0 0)",
@@ -83,7 +83,11 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display (Anton)",
-        "purpose": "The one word each stage owns. In the Hero: the name, always two lines. Mobile size clamp(84px, 24vw, 110px)."
+        "purpose": "The one word each stage owns. Hero: the name, always two lines. Build: `Build.`, one line."
+      },
+      "display-mobile": {
+        "displayName": "Display (Anton, mobile)",
+        "purpose": "The display role at 720px and below; the Hero name and the Build word both step to it. Second stop of the display ramp, not a separate voice."
       },
       "body": {
         "displayName": "Body (Archivo)",
@@ -91,15 +95,19 @@
       },
       "descriptor": {
         "displayName": "Descriptor (Mono 13)",
-        "purpose": "The one sentence above the display word. Sentence case, max 46ch, mute."
+        "purpose": "The one mono sentence beside the stage word: Hero descriptor above the name, Build pitch under the print. Sentence case, mute. Measure 54ch in both stages."
+      },
+      "index": {
+        "displayName": "Index (Mono 13, 0.06em)",
+        "purpose": "Project names in the Build index. Sentence case; bracketed on mobile."
       },
       "label": {
         "displayName": "Label (Mono 12, uppercase)",
-        "purpose": "Navigation and the DZ mark only. The only uppercase role."
+        "purpose": "Bracketed controls: navigation, the DZ mark, and the [ Visit host ] link. The only uppercase role."
       },
       "data": {
         "displayName": "Data (Mono 12, tabular)",
-        "purpose": "Reserved for data and measurements in later stages. Sentence case, tabular numerals."
+        "purpose": "Data and measurements: the scope column of the Build index (hidden on mobile). Sentence case, tabular numerals."
       }
     },
     "shadows": [],
@@ -122,22 +130,47 @@
       {
         "name": "hover-step",
         "value": "color 0.2s var(--ease-out), border-color 0.2s var(--ease-out)",
-        "purpose": "Text links step from mute to pure white. Transition removed under prefers-reduced-motion."
+        "purpose": "Text controls (nav links, index rows, [ Visit ]) step from mute to pure white. Transition removed under prefers-reduced-motion."
+      },
+      {
+        "name": "develop-on-change",
+        "value": "same keyframes as develop, applied to the active print in the Build window whenever the active project changes",
+        "purpose": "Every print change on a stage rises from near-black exactly like the Hero's load moment. Disabled under prefers-reduced-motion."
+      },
+      {
+        "name": "smooth-scroll",
+        "value": "Lenis ({ autoRaf: false, anchors: true }) driven by gsap.ticker; lenis.on('scroll', ScrollTrigger.update); lagSmoothing(0); index/anchor jumps scrollTo(y, { duration: 0.9 })",
+        "purpose": "One clock for scroll smoothing and scrubbing. Not created under prefers-reduced-motion."
+      },
+      {
+        "name": "stage-pin",
+        "value": "ScrollTrigger { start: 'top top', end: '+=' + innerHeight * steps, pin: true, scrub: true, anticipatePin: 1 }; active step = floor(progress * steps)",
+        "purpose": "A stage with several steps stays one pinned viewport and is scrubbed by scroll. Desktop (min-width 721px) and no-preference only."
+      },
+      {
+        "name": "hero-exit",
+        "value": "gsap.to(photo, { yPercent: -8, filter: 'brightness(0.08)', ease: 'none', scrollTrigger: { start: 'top top', end: 'bottom top', scrub: true } })",
+        "purpose": "As the Hero unpins its print sinks toward the ground and eases up 8% while the next word rises. Disabled under prefers-reduced-motion."
       }
     ],
     "breakpoints": [
       {
         "name": "mobile",
         "value": "720px",
-        "purpose": "max-width: portrait band crop, nav collapses to DZ + [ Talk ], leader and scroll cue hidden."
+        "purpose": "max-width: portrait band crop, nav collapses to DZ + [ Talk ], scroll cue hidden; Build unpinned, height auto, single column, 2x2 bracketed index, 4:3 print window."
+      },
+      {
+        "name": "pin",
+        "value": "721px",
+        "purpose": "min-width (with prefers-reduced-motion: no-preference): stages pin and scrub."
       }
     ],
     "material": {
       "grain": {
-        "implementation": "Generated <canvas> white-noise greyscale field, regenerated on resize via ResizeObserver, static otherwise.",
+        "implementation": "Generated <canvas> white-noise greyscale field, regenerated on resize via ResizeObserver, static otherwise. Every stage mounts its own.",
         "opacity": 0.14,
         "mixBlendMode": "overlay",
-        "zIndex": 2,
+        "zIndex": "2 (Hero, above photo and veil) / 1 (Build, above the print); always below text",
         "note": "Direction contract said ~10%; the build ships 0.14. Build wins."
       },
       "photograph": {
@@ -145,6 +178,14 @@
         "grading": "Left field and frame edges burned to #0b0b0b in the asset; no CSS vignette on desktop.",
         "desktop": "object-fit: cover; object-position: right center",
         "mobile": "66svh band, object-position: 78% 0, CSS veil linear-gradient(180deg, rgba(11,11,11,0) 55%, rgba(11,11,11,1) 100%)"
+      },
+      "prints": {
+        "path": "public/prints/{raffero,glemo,strickle,sincerin}.jpg",
+        "source": "Screenshot of the product's own public landing at 1000x900 (headless Chromium), 2026-09-13.",
+        "grading": "Greyscale, contrast 1.06, brightness 0.96, blacks lifted to #0b0b0b, edges burned toward #0b0b0b with per-landing strength (dark landings left 0.8 / right 0.7 / top 0.5 / bottom 0.6 over 10% / 6% / 5% / 8%; Sincerin no top burn because its nav bar is white; Strickle, light, 0.28 / 0.22 / 0 / 0.3). JPEG q0.86.",
+        "provenance": "Recipe embedded in each JPEG COM segment and in .impeccable/prints-provenance.txt.",
+        "rule": "The Graded Print Rule: any raster on a stage is greyscale, blacks lifted to ground, edges burned toward ground with a strength chosen per image, provenance embedded.",
+        "window": "figure, overflow hidden, background ground; fill + object-fit cover, object-position per project (50% 0). Desktop: right half of the spread, 104px top / 64px bottom, bleeding to the right edge. Mobile: aspect-ratio 4/3 inset by the gutter."
       }
     },
     "browserSurfaces": {
@@ -177,16 +218,8 @@
       "kind": "custom",
       "refersTo": "descriptor",
       "description": "The one mono sentence above the stage word.",
-      "html": "<p class=\"ds-descriptor\">Blockchain developer \u00b7 ZK \u00b7 privacy. I build systems that prove without revealing. Cali, Colombia.</p>",
-      "css": ".ds-descriptor { margin: 0; max-width: 46ch; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-weight: 400; font-size: 13px; line-height: 1.7; letter-spacing: 0.08em; color: var(--mute, #8f8d86); text-wrap: pretty; }"
-    },
-    {
-      "name": "Display Name",
-      "kind": "custom",
-      "refersTo": "display-name",
-      "description": "The stage word in Anton, two lines, each word a block.",
-      "html": "<h1 class=\"ds-name\"><span>David</span><span>Zapata</span></h1>",
-      "css": ".ds-name { margin: 0; font-family: var(--font-display, Anton, Impact, sans-serif); font-weight: 400; font-size: clamp(96px, 13vw, 200px); line-height: 0.9; letter-spacing: 0.005em; color: var(--ink, #efede8); text-wrap: balance; } .ds-name span { display: block; }"
+      "html": "<p class=\"ds-descriptor\">Blockchain developer · ZK · privacy. I build systems that prove without revealing. Cali, Colombia.</p>",
+      "css": ".ds-descriptor { margin: 0; max-width: 54ch; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-weight: 400; font-size: 13px; line-height: 1.7; letter-spacing: 0.08em; color: var(--mute, #8f8d86); }"
     },
     {
       "name": "Scroll Cue",
@@ -195,66 +228,106 @@
       "description": "44x72 hit area with a 1px line fading from transparent to ink; links to the next stage.",
       "html": "<a class=\"ds-cue\" href=\"#build\" aria-label=\"Scroll to the next stage\"><span aria-hidden=\"true\"></span></a>",
       "css": ".ds-cue { display: grid; justify-items: center; align-items: end; width: 44px; height: 72px; } .ds-cue span { width: 1px; height: 56px; background: linear-gradient(to bottom, transparent, var(--ink, #efede8)); } .ds-cue:focus-visible { outline: 1px solid var(--ink, #efede8); outline-offset: 4px; }"
+    },
+    {
+      "name": "Display Word",
+      "kind": "custom",
+      "refersTo": "display-name",
+      "description": "The stage word in Anton. Hero: the name, two lines; Build: `Build.`, one line. Steps to the mobile size at 720px.",
+      "html": "<h1 class=\"ds-name\"><span>David</span><span>Zapata</span></h1><h2 class=\"ds-word\">Build.</h2>",
+      "css": ".ds-name, .ds-word { margin: 0; font-family: var(--font-display, Anton, Impact, sans-serif); font-weight: 400; font-size: clamp(96px, 13vw, 200px); line-height: 0.9; letter-spacing: 0.005em; color: var(--ink, #efede8); } .ds-name { text-wrap: balance; } .ds-name span { display: block; } @media (max-width: 720px) { .ds-name, .ds-word { font-size: clamp(84px, 24vw, 110px); } }"
+    },
+    {
+      "name": "Index Row",
+      "kind": "button",
+      "refersTo": "index-row",
+      "description": "Project row in the Build index: name and scope on one baseline between hairlines; mute at rest, white on hover, ink when active. Bracketed 2x2 grid on mobile.",
+      "html": "<ul class=\"ds-index\" aria-label=\"Projects\"><li><button type=\"button\" class=\"ds-row\" aria-current=\"true\"><span class=\"ds-row-name\">Raffero</span><span class=\"ds-row-meta\">Avalanche</span></button></li><li><button type=\"button\" class=\"ds-row\"><span class=\"ds-row-name\">Glemo</span><span class=\"ds-row-meta\">Verifiable credentials</span></button></li><li><button type=\"button\" class=\"ds-row\"><span class=\"ds-row-name\">Strickle</span><span class=\"ds-row-meta\">EU battery passport</span></button></li><li><button type=\"button\" class=\"ds-row\"><span class=\"ds-row-name\">Sincerin</span><span class=\"ds-row-meta\">Stellar · testnet</span></button></li></ul>",
+      "css": ".ds-index { list-style: none; margin: 0; padding: 0; display: grid; background: var(--bg, #0b0b0b); } .ds-index li { border-top: 1px solid var(--line, #262624); } .ds-index li:last-child { border-bottom: 1px solid var(--line, #262624); } .ds-row { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 24px; width: 100%; padding: 18px 0; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-size: 13px; letter-spacing: 0.06em; color: var(--mute, #8f8d86); transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-row:hover { color: #fff; } .ds-row[aria-current=\"true\"] { color: var(--ink, #efede8); } .ds-row:focus-visible { outline: 1px solid var(--ink, #efede8); outline-offset: 4px; } .ds-row-meta { font-size: 12px; letter-spacing: 0.08em; color: var(--mute, #8f8d86); font-variant-numeric: tabular-nums; } @media (max-width: 720px) { .ds-index { grid-template-columns: 1fr 1fr; gap: 4px 16px; } .ds-index li, .ds-index li:last-child { border: 0; } .ds-row { width: auto; grid-template-columns: auto; gap: 0; padding: 8px 0; } .ds-row-meta { display: none; } .ds-row-name::before { content: '[ '; } .ds-row-name::after { content: ' ]'; } }"
+    },
+    {
+      "name": "Print Caption",
+      "kind": "custom",
+      "refersTo": "print-caption",
+      "description": "Pitch in the descriptor voice and the bracketed [ Visit host ] control on one baseline under a print; stacked on mobile.",
+      "html": "<div class=\"ds-caption\"><p class=\"ds-pitch\">Zero-knowledge raffles on Avalanche. Pick an alias, join a raffle, and your identity stays yours.</p><a class=\"ds-visit\" href=\"https://raffero.com\" target=\"_blank\" rel=\"noopener\">[ Visit raffero.com ]</a></div>",
+      "css": ".ds-caption { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 24px; background: var(--bg, #0b0b0b); } .ds-pitch { margin: 0; max-width: 54ch; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-size: 13px; line-height: 1.7; letter-spacing: 0.08em; color: var(--mute, #8f8d86); } .ds-visit { font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute, #8f8d86); text-decoration: none; white-space: nowrap; transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-visit:hover { color: #fff; } .ds-visit:focus-visible { outline: 1px solid var(--ink, #efede8); outline-offset: 4px; } @media (max-width: 720px) { .ds-caption { grid-template-columns: 1fr; gap: 12px; } }"
+    },
+    {
+      "name": "Print Window",
+      "kind": "custom",
+      "refersTo": "print-caption",
+      "description": "Hard-edged window filled with ground; the active graded print develops from near-black on every change.",
+      "html": "<figure class=\"ds-print\"><img class=\"ds-print-img ds-on\" src=\"/prints/raffero.jpg\" alt=\"Raffero landing page, in black and white.\" /></figure>",
+      "css": ".ds-print { position: relative; margin: 0; overflow: hidden; background: var(--bg, #0b0b0b); aspect-ratio: 10 / 9; } .ds-print-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; opacity: 0; } .ds-print-img.ds-on { opacity: 1; animation: ds-develop 1.6s cubic-bezier(0.16, 1, 0.3, 1) both; } @keyframes ds-develop { from { filter: brightness(0.05) contrast(1.6); } to { filter: brightness(1) contrast(1); } } @media (prefers-reduced-motion: reduce) { .ds-print-img.ds-on { animation: none; } } @media (max-width: 720px) { .ds-print { aspect-ratio: 4 / 3; } }"
     }
   ],
   "narrative": {
-    "northStar": "La Copia de C\u00e1mara Oscura (The Darkroom Print)",
-    "overview": "The site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.\n\nDensity is extremely low and deliberate. A stage is a single viewport with a handful of elements, each anchored to an edge or a gutter, and large areas of ground left empty on purpose. Type does the work of hierarchy: a condensed heavy display face at poster scale against small, widely tracked monospace annotations. Body text in Archivo is loaded and reserved but has not yet appeared on a surface; the first stage is entirely display and mono.\n\nMotion is a single event. On load the print \"develops\" once (1.6s, exponential ease-out) from near-black to its true tones while the caption settles into place; after that nothing moves except a 200ms colour step on hover. The resting state is complete without JavaScript and is shown immediately under prefers-reduced-motion. The product commits to six stages, one word each (Hero, Build, Ship, Prove, Live, Talk); every later stage inherits this world rather than opening a new one.",
+    "northStar": "La Copia de Cámara Oscura (The Darkroom Print)",
+    "overview": "**Creative North Star: \"La Copia de Cámara Oscura\" (The Darkroom Print)**\n\nThe site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.\n\nDensity is extremely low and deliberate. A stage is a single viewport with a handful of elements, each anchored to an edge or a gutter, and large areas of ground left empty on purpose. Type does the work of hierarchy: a condensed heavy display face at poster scale against small, widely tracked monospace annotations. Body text in Archivo is loaded and reserved but has not yet appeared on a surface; the two shipped stages (Hero, Build) are entirely display and mono.\n\nMotion is either a print developing or the visitor's own scroll. On load the Hero print \"develops\" once (1.6s, exponential ease-out) from near-black to its true tones while the caption settles into place. From the second stage on, the page is a sequence of pinned viewports scrubbed by scroll: the Hero's print sinks back into the ground as it leaves, and each change of print inside the Build spread is the same 1.6s develop again. Nothing moves on its own; every motion is tied to load, scroll position, or a hover. The resting state is complete without JavaScript and is shown immediately under `prefers-reduced-motion`, which removes smoothing, pinning and the develop. The product commits to six stages, one word each (Hero, Build, Ship, Prove, Live, Talk); every later stage inherits this world rather than opening a new one.",
     "keyCharacteristics": [
       "Black and white only; no color accent exists in the token set.",
       "One dark ground, one ink, one grey, one hairline; nothing in between.",
-      "Poster-scale condensed display name against 12\u201313px tracked monospace annotations.",
+      "Poster-scale condensed display word against 12–13px tracked monospace annotations.",
       "Flat: no shadows, no CSS vignette on desktop, no radius; edges are the composition.",
-      "Generated grain over the whole stage (mix-blend-mode: overlay, opacity 0.14).",
-      "One load animation (\"develop\"), then stillness."
+      "Generated grain over the whole stage (`mix-blend-mode: overlay`, opacity 0.14).",
+      "Every raster is a graded print: greyscale, blacks lifted to ground, edges burned to ground in the asset.",
+      "Motion is the develop (1.6s) or the scroll; nothing animates on its own."
     ],
     "rules": [
       {
         "name": "The No-Accent Rule",
-        "body": "There is no fifth colour. Emphasis is produced by scale (display vs mono), by value (ink vs mute), or by state (mute \u2192 pure white), never by hue.",
+        "body": "There is no fifth colour. Emphasis is produced by scale (display vs mono), by value (ink vs mute), or by state (mute → pure white), never by hue.",
         "section": "colors"
       },
       {
         "name": "The Burned-In Rule",
-        "body": "Darkness belongs to the photograph. Grading, vignette and the desktop left-field fade live in the raster; CSS carries no gradient on desktop. The one CSS fade (the mobile foot veil, linear-gradient(180deg, transparent 55%, ground 100%)) exists only where the portrait crop must land on solid ground.",
+        "body": "Darkness belongs to the raster. Grading, vignette and the desktop left-field fade live in the image; CSS carries no gradient on desktop. The one CSS fade (the mobile foot veil, `linear-gradient(180deg, transparent 55%, ground 100%)`) exists only where the portrait crop must land on solid ground.",
+        "section": "colors"
+      },
+      {
+        "name": "The Graded Print Rule",
+        "body": "Any raster placed on a stage is a print, not a screenshot: converted to greyscale, blacks lifted to `{colors.ground}` so the image never goes darker than the page, and its edges burned toward `{colors.ground}` with a strength chosen per image (heavier on dark sources, lighter on light ones, no burn on an edge that would swallow a white bar), with the grading recipe embedded in the file's own metadata. Colour or an unburned raster never ships.",
         "section": "colors"
       },
       {
         "name": "The One Word Rule",
-        "body": "Each stage owns exactly one display-scale word; everything else on the stage is 12\u201313px monospace. A stage with two display-scale elements has broken the world.",
+        "body": "Each stage owns exactly one display-scale word; everything else on the stage is 12–13px monospace. A stage with two display-scale elements has broken the world.",
         "section": "typography"
       },
       {
-        "name": "The Uppercase-Is-Nav Rule",
-        "body": "Uppercase with 0.14em tracking is the navigation voice only. The descriptor and data lines stay in sentence case at 0.08em.",
+        "name": "The Uppercase-Is-Control Rule",
+        "body": "Uppercase with 0.14em tracking is the voice of bracketed navigation and action links (`[ Build ]`, `[ Talk ]`, `[ Visit raffero.com ]`) only. Descriptor, index and data lines stay in sentence case at 0.06–0.08em, even when they are typed in brackets on mobile.",
         "section": "typography"
       },
       {
         "name": "The Flat Print Rule",
-        "body": "No box-shadow, no backdrop-filter, no glass, no elevation states. If an element needs separation, it gets a 1px hairline ({colors.line}) or more empty ground, never a shadow.",
+        "body": "No `box-shadow`, no `backdrop-filter`, no glass, no elevation states. If an element needs separation, it gets a 1px hairline (`{colors.line}`) or more empty ground, never a shadow.",
         "section": "elevation"
       },
       {
         "name": "The Grain Is Material Rule",
-        "body": "The grain is one static field over the whole stage, regenerated only on resize. It is never animated, never tiled per element, and never applied to text alone.",
+        "body": "The grain is one static field over the whole stage, regenerated only on resize. Every stage mounts its own Grain canvas at the same opacity and blend; it is never animated, never tiled per element, and never applied to text alone.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do keep every stage to one display-scale word in Anton and 12\u201313px JetBrains Mono for everything else.",
-      "Do anchor elements to edges and the gutter (clamp(20px, 4vw, 48px)); leave the rest of the stage as ground.",
-      "Do use {colors.mute} for every secondary voice and {colors.line} for every 1px rule; use pure white only as a hover state.",
-      "Do put darkness into the raster (burn edges to #0b0b0b in the asset) and keep the grain canvas over the whole stage at opacity 0.14 with overlay blending.",
-      "Do ship the resting state complete without JavaScript, and disable the develop/settle animation under prefers-reduced-motion.",
-      "Do type controls as bracketed text ([ Word ]) with a 200ms colour step on hover and the global 1px ink focus outline."
+      "Do keep every stage to one display-scale word in Anton (`clamp(96px, 13vw, 200px)`, stepping to `clamp(84px, 24vw, 110px)` at 720px and below) and 12–13px JetBrains Mono for everything else.",
+      "Do anchor elements to edges and the gutter (`clamp(20px, 4vw, 48px)`); leave the rest of the stage as ground.",
+      "Do use `{colors.mute}` for every secondary voice and `{colors.line}` for every 1px rule; use pure white only as a hover state.",
+      "Do put darkness into the raster (greyscale, blacks lifted to `#0b0b0b`, edges burned toward it in the asset, recipe embedded) and keep the grain canvas over the whole stage at opacity 0.14 with `overlay` blending.",
+      "Do ship the resting state complete without JavaScript, and disable smoothing, pinning, the hero exit and the develop under `prefers-reduced-motion`.",
+      "Do type controls as bracketed text (`[ Word ]`) with a 200ms colour step on hover and the global 1px ink focus outline; mark the active item by stepping it to ink, nothing else.",
+      "Do reuse the develop (1.6s, `brightness(0.05) contrast(1.6)` → true tones, `--ease-out`) for any print that changes on a stage, and drive stage progress from scroll position (pin + scrub) rather than from timers."
     ],
     "donts": [
       "Don't introduce any hue: no accent colour, no tinted greys, no coloured links or focus rings.",
-      "Don't use box-shadow, backdrop-filter, glass, or CSS gradients on desktop; the only permitted gradient is the mobile foot veil and the 1px scroll cue.",
+      "Don't use `box-shadow`, `backdrop-filter`, glass, or CSS gradients on desktop; the only permitted gradient is the mobile foot veil and the 1px scroll cue.",
       "Don't round any corner or draw any box around a control.",
       "Don't cover the finger-on-lips gesture with text at any breakpoint.",
-      "Don't uppercase anything except navigation labels, and never track the descriptor beyond 0.08em.",
-      "Don't animate anything after load except the 200ms hover colour step; the grain never moves."
+      "Don't uppercase anything except bracketed navigation and action links, and never track the descriptor beyond 0.08em.",
+      "Don't animate anything on its own after load; motion is the develop, the scroll-scrubbed pin and hero exit, or the 200ms hover colour step. The grain never moves.",
+      "Don't place a colour screenshot, an unburned raster, or a raster without its provenance on a stage."
     ]
   }
 }

@@ -12,16 +12,19 @@ const STAGES = [
 
 export default function Hero() {
   return (
-    <section className={styles.stage} aria-labelledby="hero-name">
-      <Image
-        src="/hero.jpg"
-        alt="David Zapata in black and white, looking straight at the camera with a finger on his lips."
-        fill
-        priority
-        quality={82}
-        sizes="(max-width: 720px) 180vw, 100vw"
-        className={styles.photo}
-      />
+    <section className={styles.stage} aria-labelledby="hero-name" data-stage="hero">
+      <div className={styles.plate}>
+        <Image
+          data-hero-photo=""
+          src="/hero.jpg"
+          alt="David Zapata in black and white, looking straight at the camera with a finger on his lips."
+          fill
+          priority
+          quality={82}
+          sizes="(max-width: 720px) 180vw, 100vw"
+          className={styles.photo}
+        />
+      </div>
       <div className={styles.veil} aria-hidden="true" />
       <Grain className={styles.grain} />
 

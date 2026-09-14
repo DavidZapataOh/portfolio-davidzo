@@ -24,6 +24,22 @@ FORM: The Darkroom Print, candidate 1 of my grounded list (top-ranked; the pick 
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 
+## Stage 2 · Build (surface concept locked 2026-09-13, seed 8ffa6507)
+
+Concept chosen by the user on the decision page: **Pliego a dos páginas** (two-page spread; the roll's lead card). Inherits the Hero's world unchanged.
+
+FIRST VIEWPORT (Build): a pinned 100svh stage. Left half: `Build.` in Anton at the display size, then an index of four rows in JetBrains Mono (name · chain · year when known); the active row in ink, the others in mute; rows are real links and buttons. Right half: the active project's black-and-white print (`public/prints/<name>.jpg`, a graded capture of the product's own landing) bleeding to the right edge, with a one-line pitch in mono and the link `[ Visit ]` below it. Order: Raffero, Glemo, Strickle, Sincerin.
+
+SIGNATURE INTERACTION: scrolling inside the pinned stage advances the active project through four steps (scroll-scrubbed with GSAP ScrollTrigger, smoothed by Lenis); every change develops the new print from near-black exactly like the Hero's load moment (1.6s, exponential ease-out) while the index row switches colour. Clicking an index row jumps to that step. Keyboard: rows are focusable; arrow keys move the step. `prefers-reduced-motion`: no pin, the four projects stack as ordinary sections with the same layout and no develop animation.
+
+MOBILE (≤720px): not pinned. Index above as a horizontal row of four bracketed names, print below at 4:3 with the pitch and link under it; swipe on the print or tap a name to change.
+
+REDUCED MOTION (desktop), deviation recorded after the finish review: instead of stacking four sections, the stage stays a single spread whose index buttons switch the print with no develop animation. Chosen because four repeated spreads under reduced motion is more scrolling for the same content; every project remains reachable by keyboard and pointer.
+
+TRANSITION FROM HERO: as the Hero unpins, its photograph darkens toward the ground and eases up 8% while `Build.` rises; nothing else animates.
+
+CONTENT RULES: facts only from the products' own pages or from David. Fields not yet confirmed (role, year, ZK stack, repo, metric) render nothing rather than placeholders.
+
 ## Known deviations from the contract (recorded after the finish review)
 
 - The descriptor sits at ~47% of the viewport height, not ~30%: the block is bottom-anchored under a two-line name at 13vw, which pushes it down. Kept.

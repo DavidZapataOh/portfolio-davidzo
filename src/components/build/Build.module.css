@@ -1,0 +1,240 @@
+.stage {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.left {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 104px var(--gutter) 64px var(--gutter);
+  min-width: 0;
+}
+
+.word {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(96px, 13vw, 200px);
+  line-height: 0.9;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+}
+
+.index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+
+.index li {
+  border-top: 1px solid var(--line);
+}
+
+.index li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.row {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 24px;
+  width: 100%;
+  padding: 18px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--mute);
+  transition: color 0.2s var(--ease-out);
+}
+
+.row:hover {
+  color: #fff;
+}
+
+.row[aria-current="true"] {
+  color: var(--ink);
+}
+
+.row:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.rowMeta {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+  font-variant-numeric: tabular-nums;
+}
+
+.right {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 20px;
+  padding: 104px 0 64px 0;
+  min-width: 0;
+}
+
+.print {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.printImg {
+  object-fit: cover;
+  opacity: 0;
+}
+
+/* The chosen print develops from near-black, like the Hero's load moment. */
+.printImg.on {
+  opacity: 1;
+  animation: develop 1.6s var(--ease-out) both;
+}
+
+@keyframes develop {
+  from {
+    filter: brightness(0.05) contrast(1.6);
+  }
+  to {
+    filter: brightness(1) contrast(1);
+  }
+}
+
+.caption {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 24px;
+  padding-right: var(--gutter);
+}
+
+.pitch {
+  margin: 0;
+  max-width: 54ch;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+}
+
+.visit {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s var(--ease-out);
+}
+
+.visit:hover {
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .printImg.on {
+    animation: none;
+  }
+  .row,
+  .visit {
+    transition: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .stage {
+    height: auto;
+    min-height: 0;
+    grid-template-columns: 1fr;
+    padding-bottom: 56px;
+  }
+
+  .left {
+    padding: 72px var(--gutter) 24px;
+    gap: 24px;
+  }
+
+  .word {
+    font-size: clamp(84px, 24vw, 110px);
+  }
+
+  /* Two names per row: the four controls read as one set, none orphaned. */
+  .index {
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 16px;
+  }
+
+  .index li,
+  .index li:last-child {
+    border: 0;
+  }
+
+  .row {
+    width: auto;
+    grid-template-columns: auto;
+    gap: 0;
+    padding: 8px 0;
+    font-size: 13px;
+  }
+
+  .rowMeta {
+    display: none;
+  }
+
+  /* On the phone the names are the controls, so they take the bracket voice. */
+  .rowName::before {
+    content: "[ ";
+  }
+
+  .rowName::after {
+    content: " ]";
+  }
+
+  .right {
+    grid-template-rows: auto auto;
+    gap: 16px;
+    padding: 0 var(--gutter);
+  }
+
+  .print {
+    aspect-ratio: 4 / 3;
+    touch-action: pan-y;
+  }
+
+  .caption {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-right: 0;
+  }
+}
