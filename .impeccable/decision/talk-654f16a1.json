@@ -1,0 +1,62 @@
+{
+  "title": "Elige la estructura de la etapa Talk",
+  "question": "La última pantalla del recorrido. Mismo mundo. El sorteo puso tres composiciones; bloquea una o vuelve a tirar.",
+  "options": [
+    {
+      "id": "marquee",
+      "label": "Marquesina del correo",
+      "kicker": "THE ROLL",
+      "lineage": "la marquesina de Snellenberg, pero con la acción en vez del nombre",
+      "thesis": "Tu correo, en la condensada gigante, cruzando la pantalla como una banda que el scroll arrastra; la acción es lo más grande de la página.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["banda de tipo condensado", "hairlines", "mono"],
+      "viewport": "Etapa fijada (tercer pin, corto). 'Talk.' arriba a la izquierda como en todas. A media altura, una banda con tu correo en Anton a ~120px repetido dos veces, entre dos hairlines; el scroll la arrastra de derecha a izquierda como la tira de Ship; toda la banda es un enlace mailto y al pasar el ratón pasa a blanco puro. Debajo, a la izquierda, los canales entre corchetes: [ GitHub ] [ X ] [ LinkedIn ] [ Instagram ]. Abajo del todo, una línea mono: © 2026 David Zapata · davidzo.com · no trackers. Móvil: la banda no se arrastra, el correo baja a dos líneas grandes y los corchetes se apilan.",
+      "risk": "Dos cosas gigantes en una pantalla ('Talk.' y el correo) compiten; el correo tiene que ir claramente por debajo del tamaño del display.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Talk.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "→ d…@…com — d…@…com — (banda arrastrada por el scroll, mailto)", "x": 0, "y": 3, "w": 12, "h": 2, "accent": true},
+        {"label": "[ GitHub ] [ X ] [ LinkedIn ] [ Instagram ]", "x": 0, "y": 6, "w": 8, "h": 1},
+        {"label": "© 2026 David Zapata · davidzo.com · no trackers", "x": 0, "y": 7, "w": 8, "h": 1}
+      ]}
+    },
+    {
+      "id": "lastword",
+      "label": "La última palabra",
+      "lineage": "el cierre de Nagel: una palabra y nada más",
+      "thesis": "'Talk.' es lo único grande; debajo, el correo como una sola línea en mono con hairline, y los cuatro canales entre corchetes. Sin pin.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["mono", "hairline", "oscuridad"],
+      "viewport": "Una pantalla, sin fijar. 'Talk.' a la izquierda a la altura del nombre del hero (pegado abajo), para cerrar como se abrió. A su derecha, alineado a la misma línea base: el correo en mono 13px en ink con hairline debajo (mailto), y en la línea siguiente los canales [ GitHub ] [ X ] [ LinkedIn ] [ Instagram ] en gris. Abajo a la derecha, la línea de cierre en mono: © 2026 · davidzo.com · no trackers. Entra con el mismo asentamiento de 24px que el hero. Móvil: todo apilado a la izquierda.",
+      "risk": "Puede sentirse escaso como final si el aire no está medido; vive de la tipografía y de la simetría con el hero.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Talk.", "x": 0, "y": 5, "w": 5, "h": 3, "accent": true},
+        {"label": "correo (mono, hairline, mailto)", "x": 6, "y": 5, "w": 6, "h": 1},
+        {"label": "[ GitHub ] [ X ] [ LinkedIn ] [ Instagram ]", "x": 6, "y": 6, "w": 6, "h": 1},
+        {"label": "© 2026 · davidzo.com · no trackers", "x": 6, "y": 7, "w": 6, "h": 1}
+      ]}
+    },
+    {
+      "id": "endleader",
+      "label": "Cola de película",
+      "lineage": "el final del rollo: la tira de Ship continúa y termina aquí",
+      "thesis": "El eje de Ship sigue en Talk y los canales son los últimos fotogramas del rollo; el correo es el fotograma final.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["eje hairline", "fotogramas de control entre corchetes", "mono"],
+      "viewport": "Una pantalla, sin fijar. 'Talk.' arriba a la izquierda. A media altura, el mismo eje hairline de Ship, que entra por la izquierda y termina en una marca final; sobre él, cinco controles en corchetes colgados con leaders: [ Email ] [ GitHub ] [ X ] [ LinkedIn ] [ Instagram ], el correo en ink y el resto en gris. Bajo el eje, la línea de cierre en mono. Móvil: eje vertical, controles apilados, como Ship.",
+      "risk": "Repite el dispositivo de Ship en dos etapas seguidas; gana continuidad y pierde sorpresa. Los fotogramas aquí son controles, así que van en corchetes, no en cajas.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Talk.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "——————————— eje que termina ——|", "x": 0, "y": 4, "w": 12, "h": 1},
+        {"label": "[ Email ]", "x": 0, "y": 2, "w": 2, "h": 1, "accent": true},
+        {"label": "[ GitHub ]", "x": 2, "y": 5, "w": 2, "h": 1},
+        {"label": "[ X ]", "x": 4, "y": 2, "w": 2, "h": 1},
+        {"label": "[ LinkedIn ]", "x": 6, "y": 5, "w": 2, "h": 1},
+        {"label": "[ Instagram ]", "x": 8, "y": 2, "w": 2, "h": 1},
+        {"label": "© 2026 · davidzo.com · no trackers", "x": 0, "y": 7, "w": 8, "h": 1}
+      ]}
+    }
+  ],
+  "reroll": true,
+  "buildPath": {"value": "code", "toggle": false},
+  "steer": true
+}

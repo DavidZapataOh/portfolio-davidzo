@@ -1,0 +1,67 @@
+{
+  "title": "Prove: tres vitrinas",
+  "question": "Tu indicación manda: repisa o vitrina vintage con trofeos y medallas (hackathons), casetes (bootcamps y clases) y diplomas (certificados); al pasar el ratón, un recuadro que dice qué es; al hacer clic, la prueba. Estas tres son variantes de esa idea, dibujadas a línea en blanco y negro. Bloquea una.",
+  "options": [
+    {
+      "id": "museum-case",
+      "label": "Vitrina de museo",
+      "kicker": "THE ROLL",
+      "lineage": "la vitrina de cristal de un museo: un solo mueble, tres baldas, etiquetas de sala",
+      "thesis": "Un único mueble de hairlines a lo ancho de la pantalla con tres baldas; los objetos dentro, dibujados a línea; al pasar el ratón, una etiqueta de museo en mono; al hacer clic, la prueba.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["mueble de hairlines con juntas de esquina", "objetos en línea de 1px", "etiqueta de sala en mono"],
+      "viewport": "Etapa de una pantalla larga, sin pin. 'Prove.' arriba a la izquierda. Debajo, la vitrina: un rectángulo de hairline con dos baldas interiores, todo en línea de 1px; balda superior: trofeos y medallas (hackathons, por importancia); balda media: casetes (bootcamps, clases, charlas); balda baja: diplomas enrollados y enmarcados (certificados). Cada objeto es un enlace; al pasar el ratón el objeto pasa a blanco y aparece bajo la balda una etiqueta de museo en mono: qué · dónde · año · [ Verify ]. Clic abre la prueba en pestaña nueva. Móvil: la vitrina se alarga en vertical, una balda por fila, objetos en fila horizontal deslizable, etiqueta al tocar.",
+      "risk": "Todo depende del dibujo: los cuatro objetos deben compartir un solo trazo (1px, mismas esquinas, misma densidad). Un trofeo torpe arruina la balda entera.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Prove.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "┌ vitrina ─────────────────────────────────┐", "x": 0, "y": 2, "w": 12, "h": 1},
+        {"label": "🏆 🏆 🎖 🎖 🎖   (hackathons)   ── balda", "x": 0, "y": 3, "w": 12, "h": 1, "accent": true},
+        {"label": "▭ ▭ ▭   (bootcamps y clases)   ── balda", "x": 0, "y": 5, "w": 12, "h": 1},
+        {"label": "▯ ▯ ▯ ▯   (certificados)   └───────┘", "x": 0, "y": 7, "w": 12, "h": 1}
+      ]}
+    },
+    {
+      "id": "vintage-shelf",
+      "label": "Estantería vintage",
+      "lineage": "el estante de madera con ménsulas de un estudio antiguo, grabado a línea",
+      "thesis": "Tres baldas sueltas con ménsulas dibujadas, como un grabado; los objetos con más detalle (cintas de medalla, etiquetas de casete); la etiqueta cuelga del objeto como un colgante de tienda.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["baldas de doble hairline con ménsulas", "objetos grabados con tramado de líneas", "colgante de etiqueta en mono"],
+      "viewport": "Etapa larga, sin pin. 'Prove.' arriba. Tres baldas separadas, cada una una doble hairline con dos ménsulas en línea; sobre ellas los objetos con trazo de grabado (tramas finas para el volumen, siempre 1px, siempre ink). Hover: el objeto pasa a blanco y baja un colgante con hilo de 1px y el texto en mono: qué · dónde · año · [ Verify ]. Clic abre la prueba. Móvil: baldas apiladas, objetos en fila deslizable, colgante al tocar.",
+      "risk": "El tramado de grabado es lo más 'vintage' y lo más difícil de hacer bien en SVG; si se pasa, parece clipart. Es también la que más se acerca a la palabra 'vintage' de tu indicación.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Prove.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "🏆 🎖 🏆 🎖  ══════ balda con ménsulas ══════", "x": 0, "y": 3, "w": 12, "h": 1, "accent": true},
+        {"label": "colgante: qué · dónde · año · [ Verify ]", "x": 1, "y": 4, "w": 4, "h": 1},
+        {"label": "▭ ▭ ▭  ══════ balda ══════", "x": 0, "y": 5, "w": 12, "h": 1},
+        {"label": "▯ ▯ ▯ ▯  ══════ balda ══════", "x": 0, "y": 7, "w": 12, "h": 1}
+      ]}
+    },
+    {
+      "id": "type-case",
+      "label": "Cajón de imprenta",
+      "lineage": "el cajón de tipos de una imprenta: compartimentos de hairline, un objeto por hueco",
+      "thesis": "Una rejilla de compartimentos de hairline, como un cajón de tipos; cada hueco guarda un objeto dibujado; las secciones Won · Taught · Certified son filas del cajón.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["compartimentos de hairline", "objetos en línea de 1px", "rótulos de sección en mono"],
+      "viewport": "Etapa larga, sin pin. 'Prove.' arriba. Debajo, un cajón: rectángulo de hairline dividido en compartimentos de tamaños distintos (los trofeos ocupan huecos más altos, las medallas huecos pequeños, los casetes anchos, los diplomas cuadrados); cada compartimento contiene un objeto centrado y es un enlace. Hover: el objeto pasa a blanco y el rótulo aparece dentro del hueco, en mono, en la esquina inferior. Clic abre la prueba. Móvil: el cajón se reordena en dos columnas.",
+      "risk": "Rejilla de rectángulos: la salva que los huecos tengan tamaños desiguales y que el objeto ocupe el hueco; si todos son iguales, es una rejilla de tarjetas con iconos.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Prove.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "🏆", "x": 0, "y": 2, "w": 3, "h": 3, "accent": true},
+        {"label": "🎖", "x": 3, "y": 2, "w": 2, "h": 2},
+        {"label": "🎖", "x": 5, "y": 2, "w": 2, "h": 2},
+        {"label": "▭ casete", "x": 7, "y": 2, "w": 5, "h": 2},
+        {"label": "🎖", "x": 3, "y": 4, "w": 2, "h": 1},
+        {"label": "▭ casete", "x": 5, "y": 4, "w": 4, "h": 1},
+        {"label": "▯", "x": 9, "y": 4, "w": 3, "h": 3},
+        {"label": "▯", "x": 0, "y": 5, "w": 3, "h": 3},
+        {"label": "▯", "x": 3, "y": 5, "w": 3, "h": 3},
+        {"label": "▯", "x": 6, "y": 5, "w": 3, "h": 3}
+      ]}
+    }
+  ],
+  "reroll": true,
+  "buildPath": {"value": "code", "toggle": false},
+  "steer": true
+}

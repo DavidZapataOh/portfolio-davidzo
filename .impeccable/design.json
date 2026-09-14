@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-14T12:00:00Z",
+  "generatedAt": "2026-09-14T19:30:00Z",
   "title": "Design System: David Zapata",
   "extensions": {
     "colorMeta": {
@@ -66,7 +66,7 @@
       },
       "white-hover": {
         "role": "neutral",
-        "displayName": "Pure White (hover state only: nav, index rows, [ Visit ])",
+        "displayName": "Pure White (hover state only: nav, index rows, [ Visit ], channel links, the Talk email band, a Prove shelf object on hover or open)",
         "canonical": "#ffffff",
         "tonalRamp": [
           "oklch(15% 0 0)",
@@ -83,11 +83,23 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display (Anton)",
-        "purpose": "The one word each stage owns. Hero: the name, always two lines. Build: `Build.`, one line."
+        "purpose": "The one word each stage owns. Hero: the name, always two lines. Build / Ship / Prove / Talk: `Build.` / `Ship.` / `Prove.` / `Talk.`, one line."
       },
       "display-mobile": {
         "displayName": "Display (Anton, mobile)",
-        "purpose": "The display role at 720px and below; the Hero name and the Build word both step to it. Second stop of the display ramp, not a separate voice."
+        "purpose": "The display role at 720px and below; the Hero name and the Build, Ship, Prove and Talk words step to it. Second stop of the display ramp, not a separate voice."
+      },
+      "display-compact": {
+        "displayName": "Display (Anton, compact)",
+        "purpose": "The Display step for a pinned desktop stage that must hold everything in one short viewport: `Prove.` between 741px and 820px of viewport height, with the shelf objects at zoom 0.85. Same 96px floor as Display, lower ceiling. Recorded on the detector's advisory."
+      },
+      "display-band": {
+        "displayName": "Band (Anton, address)",
+        "purpose": "Third stop of the display ramp, used once: the email address in the Talk band, repeated three times between two hairlines with a mute em-dash separator (0.3em padding) between repeats and none after the last. Ink at rest, pure white on hover. Never a headline."
+      },
+      "display-band-mobile": {
+        "displayName": "Band (Anton, mobile / reduced motion)",
+        "purpose": "The band step at 720px and below and under prefers-reduced-motion: the address shown once, static, breaking only after the @ via <wbr>; repeats and separators hidden."
       },
       "body": {
         "displayName": "Body (Archivo)",
@@ -103,11 +115,11 @@
       },
       "label": {
         "displayName": "Label (Mono 12, uppercase)",
-        "purpose": "Bracketed controls: navigation, the DZ mark, and the [ Visit host ] link. The only uppercase role."
+        "purpose": "Bracketed controls: navigation, the DZ mark, the [ Visit host ] link, the Talk channel controls ([ GitHub ] [ X ] [ LinkedIn ] [ Instagram ]) and the [ Open ] control in a Prove tag. The only uppercase role; its one non-control use is the Prove shelf label (Won / Shared / Certified), an engraving at the right end of a board."
       },
       "data": {
         "displayName": "Data (Mono 12, tabular)",
-        "purpose": "Data and measurements: the scope column of the Build index, the Ship year labels, and the organisation and dates in each Ship frame. Sentence case, tabular numerals. Build scope and year labels hidden on mobile; frame dates stay."
+        "purpose": "Data and measurements: the scope column of the Build index, the Ship year labels, the organisation and dates in each Ship frame, the Talk sign-off (© {year} David Zapata · davidzo.com), and the Prove tag's name (ink) and detail · year (mute). Sentence case, tabular numerals. Build scope and year labels hidden on mobile; frame dates stay."
       }
     },
     "shadows": [],
@@ -130,7 +142,7 @@
       {
         "name": "hover-step",
         "value": "color 0.2s var(--ease-out), border-color 0.2s var(--ease-out)",
-        "purpose": "Text controls (nav links, index rows, [ Visit ]) step from mute to pure white. Transition removed under prefers-reduced-motion."
+        "purpose": "Text controls (nav links, index rows, [ Visit ], channel links, the Talk email band) step from mute (or ink, for the band) to pure white. Transition removed under prefers-reduced-motion."
       },
       {
         "name": "develop-on-change",
@@ -155,24 +167,54 @@
       {
         "name": "strip-scrub",
         "value": "gsap.to(track, { x: () => -(track.scrollWidth - (innerWidth - 2*gutter)), ease: 'none', scrollTrigger: { start: 'top top', end: () => '+=' + distance*1.2, pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true } })",
-        "purpose": "Second pin grammar (Ship): the pinned stage drags a horizontal strip right-to-left by the scroll until its last label lands on the right gutter. Desktop (min-width 721px) and no-preference only."
+        "purpose": "Second pin grammar (Ship): the pinned stage drags a horizontal strip right-to-left by the scroll until its last label lands on the right gutter. Desktop (min-width 721px) and no-preference only. Talk reuses it as band-scrub."
       },
       {
         "name": "axis-draw",
         "value": "gsap.from(axis, { scaleX: 0, transformOrigin: 'left center', duration: 1.2, ease: CustomEase.create('davidzo-out', '0.16,1,0.3,1'), scrollTrigger: { start: 'top 70%', once: true } })",
         "purpose": "The Ship timeline axis draws once from the left on first entry and never again. Disabled under prefers-reduced-motion. Uses the system's --ease-out bezier (0.16,1,0.3,1) registered as a GSAP CustomEase, so CSS and GSAP share one curve."
+      },
+      {
+        "name": "band-scrub",
+        "value": "gsap.to(band, { x: () => -(band.scrollWidth - innerWidth), ease: 'none', scrollTrigger: { start: 'top top', end: () => '+=' + Math.max(distance*1.2, innerHeight*0.6), pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true } })",
+        "purpose": "The distance grammar on Talk's full-bleed email band: translated by its overflow past the viewport (no gutter subtracted), pin length distance x 1.2 with a floor of 0.6 x innerHeight so a short overflow still holds the stage. Desktop (min-width 721px) and no-preference only; the CSS forces transform: none on mobile and under reduced motion."
+      },
+      {
+        "name": "shelf-reveal",
+        "value": "gsap.timeline({ defaults: { ease: CustomEase('0.16,1,0.3,1') }, scrollTrigger: { start: 'top top', end: () => '+=' + innerHeight * (0.7 * shelves + 0.4), pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true } }); per shelf at i*1.4: board fromTo scaleX 0→1 (origin left center, 1s); objects fromTo y -14→0, opacity 0.25→1 (0.9s, stagger 0.12) at +0.2; label fromTo opacity 0.25→1 (0.6s) at +0.5; then an empty 0.6s beat",
+        "purpose": "Third pin grammar (Prove): the pinned stage sets its shelves down one after another as the visitor scrubs. Requires min-width 721px, min-height 741px and no-preference."
+      },
+      {
+        "name": "shelf-reveal-once",
+        "value": "same reveal per shelf on its own timeline; scrollTrigger { trigger: shelf, start: 'top 82%', once: true }",
+        "purpose": "On a desktop shorter than 741px and on phones (max-width 720px), unpinned: each shelf is set down once as it enters. Nothing under prefers-reduced-motion; the shelves are simply there."
+      },
+      {
+        "name": "tag-open",
+        "value": "opacity 0→1, transform translateY(-8px)→none, 0.2s var(--ease-out); object color ink→#fff 0.2s var(--ease-out)",
+        "purpose": "A Prove tag drops into place under its object on hover, focus (fine pointers) or first tap; the object steps to pure white. Transitions removed under prefers-reduced-motion."
       }
     ],
     "breakpoints": [
       {
         "name": "mobile",
         "value": "720px",
-        "purpose": "max-width: portrait band crop, nav collapses to DZ + [ Talk ], scroll cue hidden; Build unpinned, height auto, single column, 2x2 bracketed index, 4:3 print window. Ship unpinned, height auto, axis/ticks/years hidden, frames become hairline-separated rows beside a vertical hairline."
+        "purpose": "max-width: portrait band crop, nav collapses to DZ + [ Talk ], scroll cue hidden; Build unpinned, height auto, single column, 2x2 bracketed index, 4:3 print window. Ship unpinned, height auto, axis/ticks/years hidden, frames become hairline-separated rows beside a vertical hairline. Talk unpinned, height auto (56px foot like Build and Ship), static band with one address at clamp(40px, 11vw, 64px) breaking after the @, channels in a 2x2 bracketed grid, sign-off last. Prove unpinned, height auto (72px head / 56px foot), word 40px above the shelves, shelves 96px apart, each row a snapping horizontal scroller with objects at scale(0.8), tag rendered under the shelf."
       },
       {
         "name": "pin",
         "value": "721px",
-        "purpose": "min-width (with prefers-reduced-motion: no-preference): stages pin and scrub, by steps (Build) or by distance (Ship)."
+        "purpose": "min-width (with prefers-reduced-motion: no-preference): stages pin and scrub, by steps (Build), by distance (Ship strip, Talk band) or by reveal (Prove shelves; Prove also needs min-height 741px)."
+      },
+      {
+        "name": "pin-height",
+        "value": "741px",
+        "purpose": "min-height (with min-width 721px and no-preference): Prove pins as one 100svh viewport (72px head, 40px foot, word 32px above the shelves, shelf gap clamp(48px, 9svh, 110px)). Below it the stage flows at min-height 100svh (104px head / 96px foot, shelves 120px apart) and reveals once per shelf."
+      },
+      {
+        "name": "compact-height",
+        "value": "741px – 820px",
+        "purpose": "Pinned desktop band where Prove.'s word takes the compact display step clamp(96px, 11vw, 150px) and its objects zoom 0.85 so three shelves fit the viewport."
       }
     ],
     "material": {
@@ -180,7 +222,7 @@
         "implementation": "Generated <canvas> white-noise greyscale field, regenerated on resize via ResizeObserver, static otherwise. Every stage mounts its own.",
         "opacity": 0.14,
         "mixBlendMode": "overlay",
-        "zIndex": "2 (Hero, above photo and veil) / 1 (Build, above the print; Ship, above the ground, under the transparent frames); always below text",
+        "zIndex": "2 (Hero, above photo and veil) / 1 (Build, above the print; Ship, above the ground, under the transparent frames; Prove, above the ground, under the boards, objects and tags; Talk, above the ground, under the band's hairlines); always below text. The Prove tag body (z-index 3, ground fill) is the one element above the grain.",
         "note": "Direction contract said ~10%; the build ships 0.14. Build wins."
       },
       "photograph": {
@@ -196,11 +238,18 @@
         "provenance": "Recipe embedded in each JPEG COM segment and in .impeccable/prints-provenance.txt.",
         "rule": "The Graded Print Rule: any raster on a stage is greyscale, blacks lifted to ground, edges burned toward ground with a strength chosen per image, provenance embedded.",
         "window": "figure, overflow hidden, background ground; fill + object-fit cover, object-position per project (50% 0). Desktop: right half of the spread, 104px top / 64px bottom, bleeding to the right edge. Mobile: aspect-ratio 4/3 inset by the gutter."
+      },
+      "objects": {
+        "implementation": "Six inline SVG line drawings in src/components/prove/objects.tsx: trophy 92×96, medal 72×84, cassette 104×66, book 72×86, floppy 84×78, diploma 100×94 (viewBox = box).",
+        "stroke": "fill none; stroke currentColor 1px; round caps and joins; hatching var(--mute) 0.75px; ruled text lines on diploma, book and floppy var(--mute) 1px",
+        "states": "ink at rest; #fff on hover and while the tag is open (hatching stays mute); focus 1px ink outline offset 4px",
+        "scale": "1:1 on desktop above 820px of height; zoom 0.85 at 741–820px pinned; transform scale(0.8) from bottom center on phones",
+        "rule": "Any object standing on a stage is drawn, not pictured: no fill, no raster, no icon font, no caption; its name lives in its hanging tag."
       }
     },
     "browserSurfaces": {
       "selection": "background: var(--ink); color: var(--bg)",
-      "focusVisible": "outline: 1px solid var(--ink); outline-offset: 4px",
+      "focusVisible": "outline: 1px solid var(--ink); outline-offset: 4px (the full-bleed Talk band uses outline-offset: -1px so the ring is not clipped)",
       "scrollbar": "width 8px; track var(--bg); thumb var(--line); scrollbar-width: thin",
       "colorScheme": "dark",
       "themeColor": "#0b0b0b"
@@ -286,11 +335,51 @@
       "description": "Ship timeline entry: a transparent hairline rectangle with title (ink, 13px), organisation and dates (mute, 12px, tabular), joined to its tick by a 44px leader; a hairline-separated row on mobile.",
       "html": "<ol class=\"ds-frames\"><li class=\"ds-frame\"><span class=\"ds-leader\" aria-hidden=\"true\"></span><span class=\"ds-frame-title\">Technical Contributor</span><span class=\"ds-frame-meta\">Avalanche Team1</span><span class=\"ds-frame-meta\">2024 – present</span></li><li class=\"ds-frame\"><span class=\"ds-frame-title\">CTO</span><span class=\"ds-frame-meta\">Buckspay</span><span class=\"ds-frame-meta\">2025 – 2026</span></li></ol>",
       "css": ".ds-frames { list-style: none; margin: 0; padding: 0; display: grid; gap: 24px; background: var(--bg, #0b0b0b); } .ds-frame { position: relative; width: min(248px, calc(var(--year, 320px) - 16px)); box-sizing: border-box; display: grid; gap: 4px; padding: 14px 16px 16px; border: 1px solid var(--line, #262624); background: transparent; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); } .ds-leader { position: absolute; left: -1px; top: -45px; width: 1px; height: 44px; background: var(--line, #262624); } .ds-frame-title { font-size: 13px; font-weight: 400; letter-spacing: 0.06em; color: var(--ink, #efede8); } .ds-frame-meta { font-size: 12px; letter-spacing: 0.08em; color: var(--mute, #8f8d86); font-variant-numeric: tabular-nums; } @media (max-width: 720px), (prefers-reduced-motion: reduce) { .ds-frames { gap: 0; padding-left: 20px; border-left: 1px solid var(--line, #262624); } .ds-frame { width: auto; padding: 14px 0 16px; border: 0; border-top: 1px solid var(--line, #262624); } .ds-frame:last-child { border-bottom: 1px solid var(--line, #262624); } .ds-leader { display: none; } }"
+    },
+    {
+      "name": "Shelf",
+      "kind": "custom",
+      "refersTo": "shelf-label",
+      "description": "Prove's signature fixture: drawn objects standing on a double-hairline board with two line brackets beneath and a one-word uppercase label at the right end; a snapping horizontal scroller on mobile.",
+      "html": "<div class=\"ds-shelf\"><span class=\"ds-shelf-label\">Won</span><ul class=\"ds-shelf-row\" aria-label=\"Won\"><li class=\"ds-shelf-item\"><a class=\"ds-shelf-link\" href=\"#\" aria-label=\"ETHGlobal HackMoney\"><span class=\"ds-object\"><svg width=\"92\" height=\"96\" viewBox=\"0 0 92 96\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M24 10h44v22c0 16-10 28-22 28S24 48 24 32V10z\"/><path d=\"M24 16H12c0 14 5 22 12 24\"/><path d=\"M68 16h12c0 14-5 22-12 24\"/><path d=\"M42 60v10M50 60v10\"/><path d=\"M34 70h24l4 12H30z\"/><path d=\"M26 82h40v8H26z\"/><path d=\"M20 90h52v6H20z\"/><path d=\"M40 96h12\"/><path d=\"M52 14l-12 12M56 18l-14 14M60 22l-14 14M62 28l-12 12M62 34l-8 8\" stroke=\"var(--mute, #8f8d86)\" stroke-width=\"0.75\"/></svg></span></a></li><li class=\"ds-shelf-item\"><button type=\"button\" class=\"ds-shelf-link\" aria-label=\"Chainlink Convergence\"><span class=\"ds-object\"><svg width=\"72\" height=\"84\" viewBox=\"0 0 72 84\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M18 2h16l-8 30zM38 2h16l-8 30z\"/><path d=\"M26 2l10 34 10-34\"/><circle cx=\"36\" cy=\"60\" r=\"24\"/><circle cx=\"36\" cy=\"60\" r=\"17\"/><path d=\"M36 50l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z\"/><path d=\"M48 70l-6 6M52 66l-9 9M54 61l-11 11M54 55l-8 8\" stroke=\"var(--mute, #8f8d86)\" stroke-width=\"0.75\"/></svg></span></button></li></ul><div class=\"ds-board\" aria-hidden=\"true\"><svg class=\"ds-bracket\" width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" fill=\"none\" stroke=\"var(--line, #262624)\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M1 0v38L38 0\"/><path d=\"M1 12L24 0\"/></svg><svg class=\"ds-bracket ds-bracket-right\" width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" fill=\"none\" stroke=\"var(--line, #262624)\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M1 0v38L38 0\"/><path d=\"M1 12L24 0\"/></svg></div></div>",
+      "css": ".ds-shelf { position: relative; min-width: 0; padding-bottom: 56px; background: var(--bg, #0b0b0b); } .ds-shelf-label { position: absolute; right: 0; bottom: 26px; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute, #8f8d86); } .ds-shelf-row { list-style: none; margin: 0; padding: 0 40px; display: flex; align-items: flex-end; gap: 36px; } .ds-shelf-link { all: unset; cursor: pointer; display: grid; justify-items: center; padding: 8px 8px 0; color: var(--ink, #efede8); } .ds-shelf-link:focus-visible { outline: 1px solid var(--ink, #efede8); outline-offset: 4px; } .ds-object { display: block; color: var(--ink, #efede8); transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-shelf-item:hover .ds-object { color: #fff; } .ds-board { position: relative; height: 4px; border-top: 1px solid var(--line, #262624); border-bottom: 1px solid var(--line, #262624); } .ds-bracket { position: absolute; top: 4px; left: 48px; display: block; } .ds-bracket-right { left: auto; right: 48px; transform: scaleX(-1); } @media (prefers-reduced-motion: reduce) { .ds-object { transition: none; } } @media (max-width: 720px) { .ds-shelf-row { max-width: 100%; padding: 0 8px; gap: 32px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; } .ds-shelf-row::-webkit-scrollbar { display: none; } .ds-shelf-item { scroll-snap-align: start; flex: 0 0 auto; } .ds-object { transform: scale(0.8); transform-origin: bottom center; } }"
+    },
+    {
+      "name": "Hanging Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Prove's annotation: a 16px thread from the object and a one-line hairline body with the name in ink, detail · year in mute and [ Open ] when a URL exists; hidden at rest, drops in on hover / focus / first tap; renders under the shelf on phones.",
+      "html": "<div class=\"ds-tag-demo\"><span class=\"ds-tag ds-tag-open\" role=\"tooltip\"><span class=\"ds-thread\" aria-hidden=\"true\"></span><span class=\"ds-tag-body\"><span class=\"ds-tag-name\">Bootcamp Avalanche</span><span class=\"ds-tag-meta\">Team1 Latam · YouTube · 2025</span><span class=\"ds-tag-verify\">[ Open ]</span></span></span></div>",
+      "css": ".ds-tag-demo { position: relative; height: 80px; background: var(--bg, #0b0b0b); } .ds-tag { position: absolute; z-index: 3; left: 50%; top: 0; translate: -50% 0; display: grid; justify-items: center; pointer-events: none; opacity: 0; transform: translateY(-8px); transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-tag-open { opacity: 1; transform: none; } .ds-thread { width: 1px; height: 16px; background: var(--line, #262624); } .ds-tag-body { display: flex; flex-wrap: wrap; column-gap: 14px; row-gap: 2px; align-items: baseline; width: max-content; max-width: min(60ch, 80vw); padding: 9px 14px 10px; border: 1px solid var(--line, #262624); background: var(--bg, #0b0b0b); font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-size: 12px; letter-spacing: 0.08em; color: var(--mute, #8f8d86); white-space: nowrap; } .ds-tag-name { color: var(--ink, #efede8); } .ds-tag-verify { letter-spacing: 0.14em; text-transform: uppercase; } @media (prefers-reduced-motion: reduce) { .ds-tag { transition: none; transform: none; } } @media (max-width: 720px) { .ds-tag { position: static; translate: none; display: block; margin-top: 48px; } .ds-tag-body { width: auto; max-width: 100%; white-space: normal; } .ds-tag-meta { white-space: nowrap; } }"
+    },
+    {
+      "name": "Email Band",
+      "kind": "custom",
+      "refersTo": "mail-band",
+      "description": "Talk's signature control: the address in Anton at the Band step, repeated with mute em-dash separators between two full-bleed hairlines; one mailto link, ink at rest, white on hover, inset focus ring; scrubbed by scroll on desktop, static and wrapping after the @ on mobile.",
+      "html": "<a class=\"ds-mail\" href=\"mailto:iam@davidzo.com\" aria-label=\"Email iam@davidzo.com\"><div class=\"ds-band\"><span class=\"ds-address\">iam@<wbr>davidzo.com</span><span class=\"ds-sep\" aria-hidden=\"true\">—</span><span class=\"ds-address\" aria-hidden=\"true\">iam@<wbr>davidzo.com</span><span class=\"ds-sep\" aria-hidden=\"true\">—</span><span class=\"ds-address\" aria-hidden=\"true\">iam@<wbr>davidzo.com</span></div></a>",
+      "css": ".ds-mail { display: block; overflow: hidden; border-top: 1px solid var(--line, #262624); border-bottom: 1px solid var(--line, #262624); background: var(--bg, #0b0b0b); color: var(--ink, #efede8); text-decoration: none; transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-mail:hover { color: #fff; } .ds-mail:focus-visible { outline: 1px solid var(--ink, #efede8); outline-offset: -1px; } .ds-band { display: flex; width: max-content; padding: 14px clamp(20px, 4vw, 48px) 18px; } .ds-address, .ds-sep { font-family: var(--font-display, Anton, Impact, sans-serif); font-weight: 400; font-size: clamp(64px, 8.5vw, 120px); line-height: 1; letter-spacing: 0.005em; white-space: nowrap; } .ds-sep { padding: 0 0.3em; color: var(--mute, #8f8d86); } @media (prefers-reduced-motion: reduce) { .ds-mail { transition: none; } } @media (max-width: 720px), (prefers-reduced-motion: reduce) { .ds-band { width: auto; padding: 16px 0 18px; } .ds-address { font-size: clamp(40px, 11vw, 64px); line-height: 1.02; white-space: normal; } .ds-address[aria-hidden=\"true\"], .ds-sep { display: none; } }"
+    },
+    {
+      "name": "Channel Controls",
+      "kind": "nav",
+      "refersTo": "channel-link",
+      "description": "Talk's bracketed channel links in the Label voice, mute to white on hover; a 2x2 grid on mobile and under reduced motion.",
+      "html": "<ul class=\"ds-channels\" aria-label=\"Elsewhere\"><li><a href=\"https://github.com/DavidZapataOh/\" rel=\"me noopener\" target=\"_blank\">[ GitHub ]</a></li><li><a href=\"https://x.com/DavidZapataOh\" rel=\"me noopener\" target=\"_blank\">[ X ]</a></li><li><a href=\"https://www.linkedin.com/in/davidzapatao/\" rel=\"me noopener\" target=\"_blank\">[ LinkedIn ]</a></li><li><a href=\"https://www.instagram.com/davidzapatao/\" rel=\"me noopener\" target=\"_blank\">[ Instagram ]</a></li></ul>",
+      "css": ".ds-channels { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; list-style: none; background: var(--bg, #0b0b0b); font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; } .ds-channels a { color: var(--mute, #8f8d86); text-decoration: none; transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-channels a:hover { color: #fff; } .ds-channels a:focus-visible { outline: 1px solid var(--ink, #efede8); outline-offset: 4px; } @media (max-width: 720px), (prefers-reduced-motion: reduce) { .ds-channels { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; } }"
+    },
+    {
+      "name": "Sign-off",
+      "kind": "custom",
+      "refersTo": "signoff",
+      "description": "The closing line of the site in the Data voice: copyright, name and domain; no tracking claim. Optional ENS / PGP sit beside it only when supplied.",
+      "html": "<p class=\"ds-signoff\"><span>© 2026 David Zapata · davidzo.com</span></p>",
+      "css": ".ds-signoff { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 24px; background: var(--bg, #0b0b0b); font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-size: 12px; letter-spacing: 0.08em; color: var(--mute, #8f8d86); font-variant-numeric: tabular-nums; }"
     }
   ],
   "narrative": {
     "northStar": "La Copia de Cámara Oscura (The Darkroom Print)",
-    "overview": "**Creative North Star: \"La Copia de Cámara Oscura\" (The Darkroom Print)**\n\nThe site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.\n\nDensity is extremely low and deliberate. A stage is a single viewport with a handful of elements, each anchored to an edge or a gutter, and large areas of ground left empty on purpose. Type does the work of hierarchy: a condensed heavy display face at poster scale against small, widely tracked monospace annotations. Body text in Archivo is loaded and reserved but has not yet appeared on a surface; the three shipped stages (Hero, Build, Ship) are entirely display and mono.\n\nMotion is either a print developing or the visitor's own scroll. On load the Hero print \"develops\" once (1.6s, exponential ease-out) from near-black to its true tones while the caption settles into place. From the second stage on, the page is a sequence of pinned viewports scrubbed by scroll: the Hero's print sinks back into the ground as it leaves, each change of print inside the Build spread is the same 1.6s develop again, and the Ship strip is dragged right-to-left by the scroll while its axis draws once (1.2s, exponential ease-out) on entry. Nothing moves on its own; every motion is tied to load, scroll position, or a hover. The resting state is complete without JavaScript and is shown immediately under `prefers-reduced-motion`, which removes smoothing, pinning and the develop. The product commits to six stages, one word each (Hero, Build, Ship, Prove, Live, Talk); every later stage inherits this world rather than opening a new one.",
+    "overview": "**Creative North Star: \"La Copia de Cámara Oscura\" (The Darkroom Print)**\n\nThe site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.\n\nDensity is extremely low and deliberate. A stage is a single viewport with a handful of elements, each anchored to an edge or a gutter, and large areas of ground left empty on purpose. Type does the work of hierarchy: a condensed heavy display face at poster scale against small, widely tracked monospace annotations. Body text in Archivo is loaded and reserved but has not yet appeared on a surface; the five shipped stages (Hero, Build, Ship, Prove, Talk) are entirely display and mono, plus, in Prove, line drawing: the vitrine's objects are 1px stroke drawings in ink with fine mute hatching, no fills, no raster, no icon font.\n\nMotion is either a print developing or the visitor's own scroll. On load the Hero print \"develops\" once (1.6s, exponential ease-out) from near-black to its true tones while the caption settles into place. From the second stage on, the page is a sequence of pinned viewports scrubbed by scroll: the Hero's print sinks back into the ground as it leaves, each change of print inside the Build spread is the same 1.6s develop again, and the Ship strip is dragged right-to-left by the scroll while its axis draws once (1.2s, exponential ease-out) on entry; the closing Talk stage drags its email band the same way, and nothing on it animates but that drag. Prove, between Ship and Talk, is the third scrubbed grammar: the pinned stage reveals its three shelves one after another as the visitor scrolls (each board draws from the left, its objects are set down, its label comes up), and once the last shelf is set the pin holds a short beat and releases. Nothing moves on its own; every motion is tied to load, scroll position, or a hover. The resting state is complete without JavaScript and is shown immediately under `prefers-reduced-motion`, which removes smoothing, pinning and the develop. The product commits to six stages, one word each (Hero, Build, Ship, Prove, Live, Talk); Talk, the closing stage, was built and mounted before Prove; Prove (the trophy vitrine) shipped as an extension of this world, and the one remaining stage (Live) inherits it rather than opening a new one.",
     "keyCharacteristics": [
       "Black and white only; no color accent exists in the token set.",
       "One dark ground, one ink, one grey, one hairline; nothing in between.",
@@ -298,7 +387,8 @@
       "Flat: no shadows, no CSS vignette on desktop, no radius; edges are the composition.",
       "Generated grain over the whole stage (`mix-blend-mode: overlay`, opacity 0.14).",
       "Every raster is a graded print: greyscale, blacks lifted to ground, edges burned to ground in the asset.",
-      "Motion is the develop (1.6s) or the scroll; nothing animates on its own."
+      "Motion is the develop (1.6s) or the scroll; nothing animates on its own.",
+      "Objects are drawn, not pictured: 1px `currentColor` strokes with round joins and 0.75px mute hatching, no fills; never a raster icon or a glyph font."
     ],
     "rules": [
       {
@@ -318,13 +408,18 @@
       },
       {
         "name": "The One Word Rule",
-        "body": "Each stage owns exactly one display-scale word; everything else on the stage is 12–13px monospace. A stage with two display-scale elements has broken the world.",
+        "body": "Each stage owns exactly one display-scale word; everything else on the stage is 12–13px monospace. A stage with two display-scale elements has broken the world. The one recorded exception is the Talk band: the email address is set in the display face at the smaller Band step because the address is the stage's action, not a second word; it earns the face by being the thing the visitor came to do, and no other stage may borrow the step for a headline.",
         "section": "typography"
       },
       {
         "name": "The Uppercase-Is-Control Rule",
-        "body": "Uppercase with 0.14em tracking is the voice of bracketed navigation and action links (`[ Build ]`, `[ Talk ]`, `[ Visit raffero.com ]`) only. Descriptor, index and data lines stay in sentence case at 0.06–0.08em, even when they are typed in brackets on mobile.",
+        "body": "Uppercase with 0.14em tracking is the voice of bracketed navigation and action links (`[ Build ]`, `[ Talk ]`, `[ Visit raffero.com ]`, `[ Open ]`) only. Descriptor, index and data lines stay in sentence case at 0.06–0.08em, even when they are typed in brackets on mobile. The one recorded exception is the shelf label under a Prove board (`Won`, `Shared`, `Certified`): a one-word engraving at the edge of a fixture, mute, never bracketed, never a link; it may not be borrowed as a kicker, eyebrow or section heading anywhere else.",
         "section": "typography"
+      },
+      {
+        "name": "The Three Pins Rule",
+        "body": "A pinned stage is scrubbed by steps (Build: pin length `innerHeight × steps`, active step = `floor(progress × steps)`), by distance (Ship and Talk: pin length `distance × 1.2` with a floor of `innerHeight × 0.6`, track translated by that distance), or by reveal (Prove: pin length `innerHeight × (0.7 × shelves + 0.4)`, a scrubbed timeline that sets the stage's content down piece by piece and ends on a 0.6s beat). The reveal exists because Prove's whole content fits one viewport, so there is nothing to step or drag; it is not for stages that have. All three start `top top`, all `scrub: true`, all vanish at 720px and under `prefers-reduced-motion`, where the stage becomes an ordinary flowing section; the reveal additionally requires 741px of height and otherwise plays once per piece on entry. A fourth pin grammar needs a reason these three cannot serve.",
+        "section": "layout"
       },
       {
         "name": "The Flat Print Rule",
@@ -335,11 +430,6 @@
         "name": "The Grain Is Material Rule",
         "body": "The grain is one static field over the whole stage, regenerated only on resize. Every stage mounts its own Grain canvas at the same opacity and blend; it is never animated, never tiled per element, and never applied to text alone.",
         "section": "elevation"
-      },
-      {
-        "name": "The Two Pins Rule",
-        "body": "A pinned stage is scrubbed either by steps (Build: pin length `innerHeight × steps`, active step = `floor(progress × steps)`) or by distance (Ship: pin length `distance × 1.2`, track translated by that distance). Both start `top top`, both `scrub: true`, both vanish at 720px and under `prefers-reduced-motion`, where the stage becomes an ordinary flowing section. A third pin grammar needs a reason these two cannot serve.",
-        "section": "layout"
       }
     ],
     "dos": [
@@ -349,8 +439,12 @@
       "Do put darkness into the raster (greyscale, blacks lifted to `#0b0b0b`, edges burned toward it in the asset, recipe embedded) and keep the grain canvas over the whole stage at opacity 0.14 with `overlay` blending.",
       "Do ship the resting state complete without JavaScript, and disable smoothing, pinning, the hero exit and the develop under `prefers-reduced-motion`.",
       "Do type controls as bracketed text (`[ Word ]`) with a 200ms colour step on hover and the global 1px ink focus outline; mark the active item by stepping it to ink, nothing else.",
-      "Do reuse the develop (1.6s, `brightness(0.05) contrast(1.6)` → true tones, `--ease-out`) for any print that changes on a stage, and drive stage progress from scroll position (pin + scrub, by steps or by distance) rather than from timers.",
-      "Do keep any hairline rectangle transparent and around data only (a Ship frame), and collapse it to hairline-separated rows on mobile and under reduced motion; never box a control."
+      "Do reuse the develop (1.6s, `brightness(0.05) contrast(1.6)` → true tones, `--ease-out`) for any print that changes on a stage, and drive stage progress from scroll position (pin + scrub, by steps, by distance or by reveal) rather than from timers.",
+      "Do draw any object that stands on a stage as a line drawing: `fill: none`, 1px `currentColor` stroke with round caps and joins, 0.75px `{colors.mute}` hatching for volume, ink at rest and pure white on hover; set its foot on a hairline and put its name in a hanging tag, never in a caption under it.",
+      "Do give a pinned stage that must hold everything in one viewport its own height floor (741px) and, when the viewport is short (741–820px), the compact display step (`clamp(96px, 11vw, 150px)`) with objects at `zoom: 0.85`; below the floor, unpin and let it flow.",
+      "Do keep any hairline rectangle transparent and around data only (a Ship frame), and collapse it to hairline-separated rows on mobile and under reduced motion; never box a control. The Talk band is not a box: its two rules run full-bleed and never close at the sides.",
+      "Do set a stage's single action in the display face only at the Band step (`clamp(64px, 8.5vw, 120px)`, `clamp(40px, 11vw, 64px)` on mobile and under reduced motion) between two hairlines, as the Talk email band does; a full-bleed control takes its focus ring inset (`outline-offset: -1px`) so the ring is never clipped.",
+      "Do keep the site free of trackers and third-party scripts as a build rule, silently: the sign-off reads `© {year} David Zapata · davidzo.com` and nothing more."
     ],
     "donts": [
       "Don't introduce any hue: no accent colour, no tinted greys, no coloured links or focus rings.",
@@ -359,7 +453,11 @@
       "Don't cover the finger-on-lips gesture with text at any breakpoint.",
       "Don't uppercase anything except bracketed navigation and action links, and never track the descriptor beyond 0.08em.",
       "Don't animate anything on its own after load; motion is the develop, the scroll-scrubbed pin and hero exit, the once-only axis draw on entry, or the 200ms hover colour step. The grain never moves.",
-      "Don't place a colour screenshot, an unburned raster, or a raster without its provenance on a stage."
+      "Don't place a colour screenshot, an unburned raster, or a raster without its provenance on a stage.",
+      "Don't print a \"no trackers\" (or any privacy) claim as copy anywhere on the site; the user removed it from the sign-off. Privacy is demonstrated by the build, not announced.",
+      "Don't borrow the Band step for a headline or a second word on any stage; it exists for the one address on Talk.",
+      "Don't caption, fill, colour, or replace with a raster or icon-font glyph any shelf object; and don't reuse the shelf label's uppercase for a kicker, eyebrow or heading. The label is an engraving on a fixture, not a type role.",
+      "Don't let a phone page scroll sideways: a row that overflows scrolls inside itself (`overflow-x: auto`, snap) with `min-width: 0` on its ancestors."
     ]
   }
 }

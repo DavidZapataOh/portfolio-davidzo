@@ -1,0 +1,71 @@
+{
+  "title": "Elige la estructura de la etapa Prove",
+  "question": "La sala de trofeos: hackathons ganadas, clases y charlas dadas, certificados verificables. Mismo mundo. El sorteo puso tres composiciones; bloquea una o vuelve a tirar.",
+  "options": [
+    {
+      "id": "contactsheet",
+      "label": "Hoja de contactos",
+      "kicker": "THE ROLL",
+      "lineage": "la hoja de contactos del laboratorio: todos los negativos de un rollo en una rejilla numerada",
+      "thesis": "Cada prueba es un fotograma pequeño en una rejilla de hairlines, numerado y etiquetado en mono; el marcado con [ Verify ] es el que se puede abrir.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["copias pequeñas en B/N", "rejilla hairline", "números de fotograma en mono"],
+      "viewport": "Una pantalla (o algo más, sin pin). 'Prove.' arriba a la izquierda. Debajo, una rejilla de 4 columnas de fotogramas 3:2: cada uno lleva la imagen de la prueba tratada como copia (la página de resultados de la hackathon, el certificado, la página del curso), su número de fotograma, y bajo él en mono: qué · dónde · año y el control [ Verify ] cuando hay enlace. Los que no tienen imagen llevan solo texto sobre el suelo. Móvil: dos columnas.",
+      "risk": "Necesita una imagen por prueba (certificados como PDF o imagen, capturas de resultados); sin ellas se vacía. Muchos rectángulos: solo la gramática de hoja de contactos (numeración, hairlines) evita que parezca una rejilla de tarjetas.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Prove.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "01 · hackathon", "x": 0, "y": 2, "w": 3, "h": 3, "accent": true},
+        {"label": "02 · hackathon", "x": 3, "y": 2, "w": 3, "h": 3},
+        {"label": "03 · curso", "x": 6, "y": 2, "w": 3, "h": 3},
+        {"label": "04 · certificado", "x": 9, "y": 2, "w": 3, "h": 3},
+        {"label": "05 · charla", "x": 0, "y": 5, "w": 3, "h": 3},
+        {"label": "06 · certificado", "x": 3, "y": 5, "w": 3, "h": 3},
+        {"label": "07 …", "x": 6, "y": 5, "w": 3, "h": 3},
+        {"label": "08 …", "x": 9, "y": 5, "w": 3, "h": 3}
+      ]}
+    },
+    {
+      "id": "commitreveal",
+      "label": "Compromiso y apertura",
+      "lineage": "commit/reveal de los protocolos ZK, hecho gesto",
+      "thesis": "Cada prueba es una afirmación en mono; el enlace que la demuestra está tapado por una barra de tinta que se abre al pasar o tocar.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["barra de tinta", "mono", "hairlines"],
+      "viewport": "Una pantalla larga, sin pin. 'Prove.' arriba. Debajo, filas separadas por hairlines agrupadas en tres bloques con etiqueta mono (Won · Taught · Certified): cada fila dice qué, dónde y cuándo en ink y gris, y a la derecha una barra sólida de ink del ancho del control; hover o tap la abre con un barrido y aparece [ Verify → issuer ]. No necesita imágenes. Móvil: igual, con la barra bajo el texto.",
+      "risk": "Descartaste este dispositivo para el hero; aquí es una mecánica de una sola etapa y literalmente demuestra algo. Si no hay enlace verificable, la fila no puede tener barra.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Prove.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "Won", "x": 0, "y": 2, "w": 2, "h": 1},
+        {"label": "1st · hackathon · año", "x": 2, "y": 2, "w": 7, "h": 1},
+        {"label": "▮▮▮ → [ Verify ]", "x": 9, "y": 2, "w": 3, "h": 1, "accent": true},
+        {"label": "2nd · hackathon · año", "x": 2, "y": 3, "w": 7, "h": 1},
+        {"label": "▮▮▮", "x": 9, "y": 3, "w": 3, "h": 1},
+        {"label": "Taught", "x": 0, "y": 4, "w": 2, "h": 1},
+        {"label": "curso · universidad · año", "x": 2, "y": 4, "w": 7, "h": 1},
+        {"label": "▮▮▮", "x": 9, "y": 4, "w": 3, "h": 1},
+        {"label": "Certified", "x": 0, "y": 6, "w": 2, "h": 1},
+        {"label": "certificado · emisor · año", "x": 2, "y": 6, "w": 7, "h": 1},
+        {"label": "▮▮▮", "x": 9, "y": 6, "w": 3, "h": 1}
+      ]}
+    },
+    {
+      "id": "shelf",
+      "label": "La repisa",
+      "lineage": "tu idea original: una repisa con trofeos, casetes y diplomas",
+      "thesis": "Tres baldas de hairline con objetos dibujados a línea: trofeo por hackathon ganada, casete por clase o charla, diploma por certificado; cada uno con su etiqueta y su enlace.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["objetos en línea de 1px (SVG)", "baldas hairline", "etiquetas mono"],
+      "viewport": "Etapa de una pantalla o algo más, sin pin. 'Prove.' arriba a la izquierda. Debajo, tres baldas horizontales de hairline; sobre ellas, los objetos dibujados en línea ink de 1px en un único estilo: trofeos (hackathons, por orden de importancia), casetes (clases y charlas), diplomas (certificados). Bajo cada objeto, en mono: qué · dónde · año, y [ Verify ] cuando hay enlace. Hover: el objeto pasa a blanco. Máximo doce objetos; el resto en una línea 'ver archivo'. Móvil: una balda por fila, objetos en scroll horizontal.",
+      "risk": "Los objetos dibujados son ilustración: si el trazo no es impecable y único, la repisa parece un estante de iconos. Es la más ambiciosa y la que más se recuerda.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Prove.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "🏆 🏆 🏆 (trofeos: hackathons)  ——— balda", "x": 0, "y": 3, "w": 12, "h": 1, "accent": true},
+        {"label": "▭ ▭ ▭ (casetes: clases y charlas)  ——— balda", "x": 0, "y": 5, "w": 12, "h": 1},
+        {"label": "▯ ▯ ▯ ▯ (diplomas: certificados)  ——— balda", "x": 0, "y": 7, "w": 12, "h": 1}
+      ]}
+    }
+  ],
+  "reroll": true,
+  "buildPath": {"value": "code", "toggle": false},
+  "steer": true
+}

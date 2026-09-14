@@ -1,0 +1,176 @@
+.stage {
+  position: relative;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.word {
+  position: absolute;
+  z-index: 2;
+  top: 104px;
+  left: var(--gutter);
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(96px, 13vw, 200px);
+  line-height: 0.9;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+}
+
+/* The table's height; each print's width is capped by the height left below its own top,
+   minus its paper margins (54px) and its rotation reach (12px). */
+.stage {
+  --table-h: calc(100svh - 348px);
+}
+
+/* The table: the prints lie where they were left. */
+.table {
+  position: absolute;
+  z-index: 2;
+  left: var(--gutter);
+  right: var(--gutter);
+  top: 300px;
+  bottom: 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.print {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  /* Bound by width and by the table's height, so the prints never leave the pinned stage. */
+  width: min(var(--w, 34%), var(--wmax, 34%));
+  z-index: var(--z);
+  transform: rotate(var(--rot)); /* resting angle; the scroll animates this element */
+}
+
+.print.lifted {
+  z-index: 10;
+}
+
+/* A print: paper border, photograph, a taller bottom margin to write on.
+   The lift (straighten, brighten) lives here so it never fights the scroll transform. */
+.paper {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 10px 0;
+  background: var(--ink);
+  color: var(--bg);
+  filter: brightness(0.72);
+  transition: transform 0.3s var(--ease-out), filter 0.3s var(--ease-out);
+}
+
+.lifted .paper {
+  transform: rotate(calc(-1 * var(--rot))) scale(1.02);
+  filter: brightness(1);
+}
+
+.paper:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.photo {
+  position: relative;
+  display: block;
+  aspect-ratio: var(--aspect, 3 / 2);
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.print[style*="2/3"] {
+  --wmax: calc((var(--table-h) * (1 - var(--yf, 0)) - 66px) * 2 / 3);
+}
+
+.print:not([style*="2/3"]) {
+  --wmax: calc((var(--table-h) * (1 - var(--yf, 0)) - 66px) * 3 / 2);
+}
+
+.photo img {
+  object-fit: cover;
+}
+
+.caption {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  min-height: 34px;
+  padding: 8px 2px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--bg);
+}
+
+.captionWord {
+  font-weight: 500;
+}
+
+.captionLine {
+  color: var(--line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper {
+    transition: none;
+  }
+}
+
+/* Desktop with room: one pinned viewport; the scroll lays the prints down. */
+@media (min-width: 721px) and (min-height: 741px) {
+  .stage {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 720px) {
+  .stage {
+    height: auto;
+    min-height: 0;
+    padding: 72px var(--gutter) 56px;
+  }
+
+  .word {
+    position: static;
+    margin-bottom: 32px;
+    font-size: clamp(84px, 24vw, 110px);
+  }
+
+  .table {
+    position: static;
+    display: grid;
+    gap: 28px;
+  }
+
+  .print {
+    position: static;
+    width: 100%;
+    order: var(--o);
+    transform: rotate(calc(var(--rot) / 2.5));
+  }
+
+  .print[style*="2/3"] {
+    width: 72%;
+    justify-self: center;
+  }
+}

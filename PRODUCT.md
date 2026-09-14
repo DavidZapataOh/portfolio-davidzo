@@ -42,8 +42,8 @@ Secondary differentiator: David teaches (university chair, workshops, community 
 - Projects (Build), in this order, all live: Raffero (raffero.com, private raffles with ZK proofs on Avalanche) · Glemo (glemo.io, issue and verify digital credentials, REST API) · Strickle (strickle.vercel.app, ZK compliance for EU battery passport, Regulation 2023/1542) · Sincerin (sincerin.com, confidential payments rollup on Stellar, early stage; landing is a single line).
 - Experience (Ship), ordered by weight: CTO, Buckspay, 2025–2026 · Technical Contributor, Avalanche Team1, 2024–present · Blockchain Developer, freelance, 2022–present · Developer Contributor, UltravioletaDAO, 2023–2025 · Profesor de cátedra, Pontificia Universidad Javeriana Cali, 2025–present · Full Stack Developer, freelance, 2019–2022.
 - Prove: hackathons won, classes and talks given, certificates. Rule agreed: the teaching role lives in Ship; the courses themselves are objects in Prove. Same rule for founder roles: role in Ship, product in Build.
-- Live: football, travel, mathematics, nature. Mathematics is the honest bridge to ZK.
-- Talk: email as primary action; GitHub, X, LinkedIn, Instagram. A PGP fingerprint or ENS is welcome and coherent with the privacy positioning.
+- Live: football, travel, mathematics, community (nature dropped 2026-09-14: near-duplicate of travel). Photographs supplied by David on 2026-09-14. Mathematics is the honest bridge to ZK.
+- Talk: email iam@davidzo.com as primary action; GitHub github.com/DavidZapataOh, X x.com/DavidZapataOh, LinkedIn linkedin.com/in/davidzapatao, Instagram instagram.com/davidzapatao. No PGP/ENS for now. Do not print a "no trackers" line on the site (David: unnecessary, cringe); the no-tracker rule stays a build rule, not copy.
 
 **Rules future work must keep:**
 

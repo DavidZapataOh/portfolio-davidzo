@@ -1,0 +1,58 @@
+{
+  "title": "Elige la estructura de la etapa Live",
+  "question": "Tus pasiones: fútbol, viajes, matemática, naturaleza. Cuatro fotos tuyas tratadas como copias en blanco y negro. Mismo mundo. El sorteo puso tres composiciones; bloquea una o vuelve a tirar.",
+  "options": [
+    {
+      "id": "easel",
+      "label": "El caballete",
+      "kicker": "THE ROLL",
+      "lineage": "el caballete de ampliación del laboratorio: una copia grande y las demás esperando en la tira",
+      "thesis": "Una copia grande a la derecha con la palabra de la pasión; a la izquierda, 'Live.' y una tira con las otras tres; el scroll dentro de la etapa cambia la copia grande.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["copia grande a sangre", "tira de copias pequeñas", "mono"],
+      "viewport": "Etapa fijada, cuatro pasos como Build. 'Live.' arriba a la izquierda a 104px. Mitad derecha: la copia activa a sangre por la derecha, revelándose desde negro en cada cambio, con la palabra de la pasión (Football, Travel, Math, Nature) en Anton mediano sobre su esquina inferior izquierda y una línea en mono debajo (el equipo, el lugar, la razón). Mitad izquierda abajo: una tira horizontal con las cuatro copias en pequeño, la activa en ink y las demás atenuadas; clic salta al paso. Móvil: sin pin, copia a 4:3, tira debajo, toque o swipe.",
+      "risk": "Es la misma mecánica que Build: coherente, pero el recorrido tendría dos etapas gemelas. Lo salvan la palabra grande sobre la copia y el contenido personal.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Live.", "x": 0, "y": 1, "w": 5, "h": 2},
+        {"label": "copia activa a sangre + 'Football' + línea mono", "x": 6, "y": 0, "w": 6, "h": 8, "accent": true},
+        {"label": "▭ ▭ ▭ ▭ tira de copias pequeñas", "x": 0, "y": 6, "w": 5, "h": 2}
+      ]}
+    },
+    {
+      "id": "desk",
+      "label": "La mesa de copias",
+      "lineage": "copias recién reveladas dejadas sobre la mesa del laboratorio, ligeramente giradas y superpuestas",
+      "thesis": "Cuatro copias sobre el suelo negro, cada una un poco girada y solapando a la siguiente, con la pasión escrita en mono en su borde; al pasar el ratón la copia sube arriba del todo y se endereza.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["copias con borde blanco fino", "rotaciones de 2 a 6 grados", "mono en el borde"],
+      "viewport": "Una pantalla, sin pin. 'Live.' arriba a la izquierda. El resto de la pantalla es la mesa: cuatro copias (cada una ~34% del ancho) con un borde de papel de 10px, giradas entre −6 y +5 grados y solapadas como recién dejadas; en el borde inferior de cada una, en mono: la pasión y su línea (equipo, lugar). Hover o foco: la copia sube al frente, se endereza y pasa de atenuada a ink. Sin clic: no hay nada que abrir. Móvil: las copias se apilan en una columna con giros leves.",
+      "risk": "Es la única composición del sitio con rotaciones; o se ejecuta con gusto (pocos grados, solapes pequeños) o rompe la disciplina del mundo. También es la más personal.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Live.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "Football (−4°)", "x": 1, "y": 2, "w": 4, "h": 4, "accent": true},
+        {"label": "Travel (+3°)", "x": 4, "y": 3, "w": 4, "h": 4},
+        {"label": "Math (−2°)", "x": 7, "y": 1, "w": 4, "h": 4},
+        {"label": "Nature (+5°)", "x": 8, "y": 4, "w": 4, "h": 4}
+      ]}
+    },
+    {
+      "id": "strip",
+      "label": "Tira de fotos",
+      "lineage": "la tira de fotomatón, o la de negativos de Ship, pero con las copias reveladas",
+      "thesis": "Cuatro copias anchas en una tira horizontal más larga que la pantalla; el scroll la arrastra como en Ship, y cada copia lleva su palabra y su línea en mono.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["copias 3:2 con hairline", "tira arrastrada por el scroll", "mono"],
+      "viewport": "Etapa fijada con arrastre a distancia como Ship. 'Live.' arriba a la izquierda a 104px. A media altura, una tira de cuatro copias 3:2 de ~640px de ancho separadas por 24px, con hairline; bajo cada copia, la pasión en Anton pequeño y una línea en mono. El scroll la desplaza hasta que la última copia queda en el margen derecho. Móvil: sin pin, copias apiladas.",
+      "risk": "Tercera etapa con arrastre horizontal (Ship y Talk ya lo usan): el recorrido puede sentirse repetitivo justo antes del cierre.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Live.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "Football", "x": 0, "y": 3, "w": 5, "h": 4, "accent": true},
+        {"label": "Travel", "x": 5, "y": 3, "w": 5, "h": 4},
+        {"label": "Math →", "x": 10, "y": 3, "w": 2, "h": 4}
+      ]}
+    }
+  ],
+  "reroll": true,
+  "buildPath": {"value": "code", "toggle": false},
+  "steer": true
+}
