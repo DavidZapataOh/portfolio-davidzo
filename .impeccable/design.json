@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-14T00:00:00Z",
+  "generatedAt": "2026-09-14T12:00:00Z",
   "title": "Design System: David Zapata",
   "extensions": {
     "colorMeta": {
@@ -99,7 +99,7 @@
       },
       "index": {
         "displayName": "Index (Mono 13, 0.06em)",
-        "purpose": "Project names in the Build index. Sentence case; bracketed on mobile."
+        "purpose": "Project names in the Build index (mute, ink when active) and the role title of each Ship frame (ink, weight 400). Sentence case; Build names bracketed on mobile."
       },
       "label": {
         "displayName": "Label (Mono 12, uppercase)",
@@ -107,7 +107,7 @@
       },
       "data": {
         "displayName": "Data (Mono 12, tabular)",
-        "purpose": "Data and measurements: the scope column of the Build index (hidden on mobile). Sentence case, tabular numerals."
+        "purpose": "Data and measurements: the scope column of the Build index, the Ship year labels, and the organisation and dates in each Ship frame. Sentence case, tabular numerals. Build scope and year labels hidden on mobile; frame dates stay."
       }
     },
     "shadows": [],
@@ -151,18 +151,28 @@
         "name": "hero-exit",
         "value": "gsap.to(photo, { yPercent: -8, filter: 'brightness(0.08)', ease: 'none', scrollTrigger: { start: 'top top', end: 'bottom top', scrub: true } })",
         "purpose": "As the Hero unpins its print sinks toward the ground and eases up 8% while the next word rises. Disabled under prefers-reduced-motion."
+      },
+      {
+        "name": "strip-scrub",
+        "value": "gsap.to(track, { x: () => -(track.scrollWidth - (innerWidth - 2*gutter)), ease: 'none', scrollTrigger: { start: 'top top', end: () => '+=' + distance*1.2, pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true } })",
+        "purpose": "Second pin grammar (Ship): the pinned stage drags a horizontal strip right-to-left by the scroll until its last label lands on the right gutter. Desktop (min-width 721px) and no-preference only."
+      },
+      {
+        "name": "axis-draw",
+        "value": "gsap.from(axis, { scaleX: 0, transformOrigin: 'left center', duration: 1.2, ease: CustomEase.create('davidzo-out', '0.16,1,0.3,1'), scrollTrigger: { start: 'top 70%', once: true } })",
+        "purpose": "The Ship timeline axis draws once from the left on first entry and never again. Disabled under prefers-reduced-motion. Uses the system's --ease-out bezier (0.16,1,0.3,1) registered as a GSAP CustomEase, so CSS and GSAP share one curve."
       }
     ],
     "breakpoints": [
       {
         "name": "mobile",
         "value": "720px",
-        "purpose": "max-width: portrait band crop, nav collapses to DZ + [ Talk ], scroll cue hidden; Build unpinned, height auto, single column, 2x2 bracketed index, 4:3 print window."
+        "purpose": "max-width: portrait band crop, nav collapses to DZ + [ Talk ], scroll cue hidden; Build unpinned, height auto, single column, 2x2 bracketed index, 4:3 print window. Ship unpinned, height auto, axis/ticks/years hidden, frames become hairline-separated rows beside a vertical hairline."
       },
       {
         "name": "pin",
         "value": "721px",
-        "purpose": "min-width (with prefers-reduced-motion: no-preference): stages pin and scrub."
+        "purpose": "min-width (with prefers-reduced-motion: no-preference): stages pin and scrub, by steps (Build) or by distance (Ship)."
       }
     ],
     "material": {
@@ -170,7 +180,7 @@
         "implementation": "Generated <canvas> white-noise greyscale field, regenerated on resize via ResizeObserver, static otherwise. Every stage mounts its own.",
         "opacity": 0.14,
         "mixBlendMode": "overlay",
-        "zIndex": "2 (Hero, above photo and veil) / 1 (Build, above the print); always below text",
+        "zIndex": "2 (Hero, above photo and veil) / 1 (Build, above the print; Ship, above the ground, under the transparent frames); always below text",
         "note": "Direction contract said ~10%; the build ships 0.14. Build wins."
       },
       "photograph": {
@@ -260,11 +270,27 @@
       "description": "Hard-edged window filled with ground; the active graded print develops from near-black on every change.",
       "html": "<figure class=\"ds-print\"><img class=\"ds-print-img ds-on\" src=\"/prints/raffero.jpg\" alt=\"Raffero landing page, in black and white.\" /></figure>",
       "css": ".ds-print { position: relative; margin: 0; overflow: hidden; background: var(--bg, #0b0b0b); aspect-ratio: 10 / 9; } .ds-print-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; opacity: 0; } .ds-print-img.ds-on { opacity: 1; animation: ds-develop 1.6s cubic-bezier(0.16, 1, 0.3, 1) both; } @keyframes ds-develop { from { filter: brightness(0.05) contrast(1.6); } to { filter: brightness(1) contrast(1); } } @media (prefers-reduced-motion: reduce) { .ds-print-img.ds-on { animation: none; } } @media (max-width: 720px) { .ds-print { aspect-ratio: 4 / 3; } }"
+    },
+    {
+      "name": "Timeline Axis",
+      "kind": "custom",
+      "refersTo": "year-label",
+      "description": "Ship's time axis: 1px hairline, one 1px mute tick and a 12px tabular year per stop, year pitch clamp(220px, 22vw, 320px).",
+      "html": "<div class=\"ds-axis-wrap\" aria-hidden=\"true\"><div class=\"ds-axis\"></div><div class=\"ds-year\" style=\"--i:0\"><span class=\"ds-tick\"></span><span class=\"ds-year-label\">2019</span></div><div class=\"ds-year\" style=\"--i:1\"><span class=\"ds-tick\"></span><span class=\"ds-year-label\">2020</span></div><div class=\"ds-year\" style=\"--i:2\"><span class=\"ds-tick\"></span><span class=\"ds-year-label\">2021</span></div></div>",
+      "css": ".ds-axis-wrap { --year: clamp(220px, 22vw, 320px); position: relative; height: 40px; width: calc(var(--year) * 2 + 48px); background: var(--bg, #0b0b0b); } .ds-axis { position: absolute; left: 0; top: 0; width: calc(var(--year) * 2); height: 1px; background: var(--line, #262624); } .ds-year { position: absolute; left: calc(var(--i) * var(--year)); top: 0; } .ds-tick { position: absolute; left: 0; top: -4px; width: 1px; height: 9px; background: var(--mute, #8f8d86); } .ds-year-label { position: absolute; left: 8px; top: 12px; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-size: 12px; letter-spacing: 0.08em; color: var(--mute, #8f8d86); font-variant-numeric: tabular-nums; white-space: nowrap; }"
+    },
+    {
+      "name": "Frame",
+      "kind": "card",
+      "refersTo": "frame",
+      "description": "Ship timeline entry: a transparent hairline rectangle with title (ink, 13px), organisation and dates (mute, 12px, tabular), joined to its tick by a 44px leader; a hairline-separated row on mobile.",
+      "html": "<ol class=\"ds-frames\"><li class=\"ds-frame\"><span class=\"ds-leader\" aria-hidden=\"true\"></span><span class=\"ds-frame-title\">Technical Contributor</span><span class=\"ds-frame-meta\">Avalanche Team1</span><span class=\"ds-frame-meta\">2024 – present</span></li><li class=\"ds-frame\"><span class=\"ds-frame-title\">CTO</span><span class=\"ds-frame-meta\">Buckspay</span><span class=\"ds-frame-meta\">2025 – 2026</span></li></ol>",
+      "css": ".ds-frames { list-style: none; margin: 0; padding: 0; display: grid; gap: 24px; background: var(--bg, #0b0b0b); } .ds-frame { position: relative; width: min(248px, calc(var(--year, 320px) - 16px)); box-sizing: border-box; display: grid; gap: 4px; padding: 14px 16px 16px; border: 1px solid var(--line, #262624); background: transparent; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); } .ds-leader { position: absolute; left: -1px; top: -45px; width: 1px; height: 44px; background: var(--line, #262624); } .ds-frame-title { font-size: 13px; font-weight: 400; letter-spacing: 0.06em; color: var(--ink, #efede8); } .ds-frame-meta { font-size: 12px; letter-spacing: 0.08em; color: var(--mute, #8f8d86); font-variant-numeric: tabular-nums; } @media (max-width: 720px), (prefers-reduced-motion: reduce) { .ds-frames { gap: 0; padding-left: 20px; border-left: 1px solid var(--line, #262624); } .ds-frame { width: auto; padding: 14px 0 16px; border: 0; border-top: 1px solid var(--line, #262624); } .ds-frame:last-child { border-bottom: 1px solid var(--line, #262624); } .ds-leader { display: none; } }"
     }
   ],
   "narrative": {
     "northStar": "La Copia de Cámara Oscura (The Darkroom Print)",
-    "overview": "**Creative North Star: \"La Copia de Cámara Oscura\" (The Darkroom Print)**\n\nThe site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.\n\nDensity is extremely low and deliberate. A stage is a single viewport with a handful of elements, each anchored to an edge or a gutter, and large areas of ground left empty on purpose. Type does the work of hierarchy: a condensed heavy display face at poster scale against small, widely tracked monospace annotations. Body text in Archivo is loaded and reserved but has not yet appeared on a surface; the two shipped stages (Hero, Build) are entirely display and mono.\n\nMotion is either a print developing or the visitor's own scroll. On load the Hero print \"develops\" once (1.6s, exponential ease-out) from near-black to its true tones while the caption settles into place. From the second stage on, the page is a sequence of pinned viewports scrubbed by scroll: the Hero's print sinks back into the ground as it leaves, and each change of print inside the Build spread is the same 1.6s develop again. Nothing moves on its own; every motion is tied to load, scroll position, or a hover. The resting state is complete without JavaScript and is shown immediately under `prefers-reduced-motion`, which removes smoothing, pinning and the develop. The product commits to six stages, one word each (Hero, Build, Ship, Prove, Live, Talk); every later stage inherits this world rather than opening a new one.",
+    "overview": "**Creative North Star: \"La Copia de Cámara Oscura\" (The Darkroom Print)**\n\nThe site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.\n\nDensity is extremely low and deliberate. A stage is a single viewport with a handful of elements, each anchored to an edge or a gutter, and large areas of ground left empty on purpose. Type does the work of hierarchy: a condensed heavy display face at poster scale against small, widely tracked monospace annotations. Body text in Archivo is loaded and reserved but has not yet appeared on a surface; the three shipped stages (Hero, Build, Ship) are entirely display and mono.\n\nMotion is either a print developing or the visitor's own scroll. On load the Hero print \"develops\" once (1.6s, exponential ease-out) from near-black to its true tones while the caption settles into place. From the second stage on, the page is a sequence of pinned viewports scrubbed by scroll: the Hero's print sinks back into the ground as it leaves, each change of print inside the Build spread is the same 1.6s develop again, and the Ship strip is dragged right-to-left by the scroll while its axis draws once (1.2s, exponential ease-out) on entry. Nothing moves on its own; every motion is tied to load, scroll position, or a hover. The resting state is complete without JavaScript and is shown immediately under `prefers-reduced-motion`, which removes smoothing, pinning and the develop. The product commits to six stages, one word each (Hero, Build, Ship, Prove, Live, Talk); every later stage inherits this world rather than opening a new one.",
     "keyCharacteristics": [
       "Black and white only; no color accent exists in the token set.",
       "One dark ground, one ink, one grey, one hairline; nothing in between.",
@@ -309,16 +335,22 @@
         "name": "The Grain Is Material Rule",
         "body": "The grain is one static field over the whole stage, regenerated only on resize. Every stage mounts its own Grain canvas at the same opacity and blend; it is never animated, never tiled per element, and never applied to text alone.",
         "section": "elevation"
+      },
+      {
+        "name": "The Two Pins Rule",
+        "body": "A pinned stage is scrubbed either by steps (Build: pin length `innerHeight × steps`, active step = `floor(progress × steps)`) or by distance (Ship: pin length `distance × 1.2`, track translated by that distance). Both start `top top`, both `scrub: true`, both vanish at 720px and under `prefers-reduced-motion`, where the stage becomes an ordinary flowing section. A third pin grammar needs a reason these two cannot serve.",
+        "section": "layout"
       }
     ],
     "dos": [
       "Do keep every stage to one display-scale word in Anton (`clamp(96px, 13vw, 200px)`, stepping to `clamp(84px, 24vw, 110px)` at 720px and below) and 12–13px JetBrains Mono for everything else.",
       "Do anchor elements to edges and the gutter (`clamp(20px, 4vw, 48px)`); leave the rest of the stage as ground.",
-      "Do use `{colors.mute}` for every secondary voice and `{colors.line}` for every 1px rule; use pure white only as a hover state.",
+      "Do use `{colors.mute}` for every secondary voice and `{colors.line}` for every 1px rule (the one exception: a tick that crosses a line-coloured axis is 1px `{colors.mute}`); use pure white only as a hover state.",
       "Do put darkness into the raster (greyscale, blacks lifted to `#0b0b0b`, edges burned toward it in the asset, recipe embedded) and keep the grain canvas over the whole stage at opacity 0.14 with `overlay` blending.",
       "Do ship the resting state complete without JavaScript, and disable smoothing, pinning, the hero exit and the develop under `prefers-reduced-motion`.",
       "Do type controls as bracketed text (`[ Word ]`) with a 200ms colour step on hover and the global 1px ink focus outline; mark the active item by stepping it to ink, nothing else.",
-      "Do reuse the develop (1.6s, `brightness(0.05) contrast(1.6)` → true tones, `--ease-out`) for any print that changes on a stage, and drive stage progress from scroll position (pin + scrub) rather than from timers."
+      "Do reuse the develop (1.6s, `brightness(0.05) contrast(1.6)` → true tones, `--ease-out`) for any print that changes on a stage, and drive stage progress from scroll position (pin + scrub, by steps or by distance) rather than from timers.",
+      "Do keep any hairline rectangle transparent and around data only (a Ship frame), and collapse it to hairline-separated rows on mobile and under reduced motion; never box a control."
     ],
     "donts": [
       "Don't introduce any hue: no accent colour, no tinted greys, no coloured links or focus rings.",
@@ -326,7 +358,7 @@
       "Don't round any corner or draw any box around a control.",
       "Don't cover the finger-on-lips gesture with text at any breakpoint.",
       "Don't uppercase anything except bracketed navigation and action links, and never track the descriptor beyond 0.08em.",
-      "Don't animate anything on its own after load; motion is the develop, the scroll-scrubbed pin and hero exit, or the 200ms hover colour step. The grain never moves.",
+      "Don't animate anything on its own after load; motion is the develop, the scroll-scrubbed pin and hero exit, the once-only axis draw on entry, or the 200ms hover colour step. The grain never moves.",
       "Don't place a colour screenshot, an unburned raster, or a raster without its provenance on a stage."
     ]
   }

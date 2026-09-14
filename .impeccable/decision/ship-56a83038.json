@@ -1,0 +1,69 @@
+{
+  "title": "Elige la estructura de la etapa Ship",
+  "question": "Mismo mundo que el hero y Build. Esto decide cómo se leen los seis roles (2019 a hoy). El sorteo puso tres estructuras; bloquea una o vuelve a tirar.",
+  "options": [
+    {
+      "id": "filmstrip",
+      "label": "Tira de contactos",
+      "kicker": "THE ROLL",
+      "lineage": "la tira de negativos numerada del laboratorio: un fotograma por año",
+      "thesis": "Una tira horizontal de 2019 a 2026 con los roles colgados como fotogramas en el año en que empezaron; el scroll la arrastra.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["hairline con marcas de año", "fotogramas de texto", "mono"],
+      "viewport": "Etapa fijada. 'Ship.' arriba a la izquierda. A media altura, una línea de tiempo de 2019 a 2026 con marcas de año en mono; los seis roles son fotogramas (título en ink, organización y fechas en gris) anclados sobre o bajo la línea en su año de inicio, y los que siguen activos llevan 'present'. La tira es más ancha que la pantalla y el scroll dentro de la etapa la desplaza de izquierda a derecha, como los pasos de Build. Móvil: la tira gira a vertical, años a la izquierda, fotogramas apilados, sin pin.",
+      "risk": "Dos etapas fijadas seguidas (Build y Ship) pueden hacer largo el recorrido; hay que medir la duración del pin.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Ship.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "2019 ——— 2020 ——— 2021 ——— 2022 ——— 2023 ——— 2024 ——— 2025 ——— 2026 →", "x": 0, "y": 4, "w": 12, "h": 1, "accent": true},
+        {"label": "Full Stack · Freelance", "x": 0, "y": 2, "w": 3, "h": 2},
+        {"label": "Blockchain · Freelance", "x": 4, "y": 5, "w": 3, "h": 2},
+        {"label": "Community · UltravioletaDAO", "x": 6, "y": 2, "w": 3, "h": 2},
+        {"label": "Contributor · Avalanche Team1", "x": 8, "y": 5, "w": 3, "h": 2},
+        {"label": "CTO · Buckspay / Profesor · Javeriana", "x": 9, "y": 2, "w": 3, "h": 2}
+      ]}
+    },
+    {
+      "id": "ledger",
+      "label": "Manifiesto de carga",
+      "lineage": "el manifiesto de embarque: una tabla mono de lo que se entregó y cuándo",
+      "thesis": "Seis líneas de un manifiesto: años en columna tabular, cargo, organización. Todo legible de un vistazo, sin pin.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["tabla mono", "hairlines", "numerales tabulares"],
+      "viewport": "Una sola pantalla, sin fijar. Mitad izquierda: 'Ship.' y debajo una frase en mono sobre qué se entregó. Mitad derecha: una tabla de seis filas separadas por hairlines; columna de años en numerales tabulares (2025–2026, 2024–present…), cargo en ink, organización en gris. Los roles activos ('present') en ink completo. Al entrar la etapa, las filas se revelan de arriba abajo una sola vez. Móvil: la tabla ocupa el ancho, años arriba de cada fila.",
+      "risk": "Es una tabla: si la tipografía no es impecable parece un CV pegado. Lo que la salva es el ritmo de las hairlines y los numerales.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Ship.", "x": 0, "y": 1, "w": 5, "h": 2},
+        {"label": "frase mono", "x": 0, "y": 3, "w": 5, "h": 1},
+        {"label": "2025–2026   CTO   Buckspay", "x": 6, "y": 1, "w": 6, "h": 1, "accent": true},
+        {"label": "2024–present   Technical Contributor   Avalanche Team1", "x": 6, "y": 2, "w": 6, "h": 1},
+        {"label": "2022–present   Blockchain Developer   Freelance", "x": 6, "y": 3, "w": 6, "h": 1},
+        {"label": "2023–2025   Community Builder   UltravioletaDAO", "x": 6, "y": 4, "w": 6, "h": 1},
+        {"label": "2025–2026   Profesor de cátedra   Javeriana Cali", "x": 6, "y": 5, "w": 6, "h": 1},
+        {"label": "2019–2022   Full Stack Developer   Freelance", "x": 6, "y": 6, "w": 6, "h": 1}
+      ]}
+    },
+    {
+      "id": "gantt",
+      "label": "Barras de concurrencia",
+      "lineage": "el diagrama de barras del ingeniero: lo que corrió en paralelo se ve",
+      "thesis": "Cada rol es una barra de hairline sobre el eje 2019 a 2026; las barras se superponen y muestran que el freelance corrió debajo de todo.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["hairlines", "barras de tinta de 1px a 2px", "mono"],
+      "viewport": "Etapa de una pantalla. 'Ship.' arriba a la izquierda. Debajo, el eje de años en mono a lo ancho y seis barras horizontales, una por rol, cada una del año de inicio al de fin (las activas llegan al borde derecho); etiqueta en mono al inicio de cada barra: cargo · organización. Las barras se dibujan de izquierda a derecha al entrar, una vez. Móvil: el eje pasa a vertical y las barras a columnas.",
+      "risk": "Lee como un gráfico de gestión si las barras engordan o aparece cualquier color; tiene que ser todo hairline e ink.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "Ship.", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "2019   2020   2021   2022   2023   2024   2025   2026", "x": 0, "y": 2, "w": 12, "h": 1},
+        {"label": "▬▬▬▬▬ Full Stack · Freelance", "x": 0, "y": 3, "w": 5, "h": 1},
+        {"label": "▬▬▬▬▬▬▬▬ Blockchain · Freelance →", "x": 5, "y": 4, "w": 7, "h": 1, "accent": true},
+        {"label": "▬▬▬ Community · UltravioletaDAO", "x": 6, "y": 5, "w": 3, "h": 1},
+        {"label": "▬▬▬▬ Contributor · Avalanche Team1 →", "x": 8, "y": 6, "w": 4, "h": 1},
+        {"label": "▬ CTO · Buckspay", "x": 9, "y": 7, "w": 2, "h": 1},
+        {"label": "▬ Profesor · Javeriana", "x": 9, "y": 3, "w": 2, "h": 1}
+      ]}
+    }
+  ],
+  "reroll": true,
+  "buildPath": {"value": "code", "toggle": false},
+  "steer": true
+}

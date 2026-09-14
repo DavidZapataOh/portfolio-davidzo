@@ -1,0 +1,210 @@
+.stage {
+  --year: clamp(220px, 22vw, 320px);
+  /* Never wider than one year of pitch, so neighbouring frames cannot overlap. */
+  --frame: min(248px, calc(var(--year) - 16px));
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.word {
+  position: absolute;
+  z-index: 2;
+  top: 104px;
+  left: var(--gutter);
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(96px, 13vw, 200px);
+  line-height: 0.9;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+}
+
+.strip {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  padding: 0 var(--gutter);
+}
+
+/* The strip: wider than the viewport, translated by the pinned scroll. */
+.track {
+  position: absolute;
+  top: 56%;
+  left: var(--gutter);
+  height: 0;
+  /* From the 2019 tick to the right edge of the 2026 label: nothing trails past it. */
+  width: calc(var(--year) * 7 + 48px);
+  will-change: transform;
+}
+
+.axis {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--year) * 7);
+  height: 1px;
+  background: var(--line);
+}
+
+.year {
+  position: absolute;
+  left: calc(var(--i) * var(--year));
+  top: 0;
+}
+
+.tick {
+  position: absolute;
+  left: 0;
+  top: -4px;
+  width: 1px;
+  height: 9px;
+  background: var(--mute);
+}
+
+.yearLabel {
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+  font-variant-numeric: tabular-nums;
+}
+
+.frames {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.frame {
+  position: absolute;
+  left: calc(var(--i) * var(--year));
+  width: var(--frame);
+  box-sizing: border-box;
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px 16px;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+}
+
+.above {
+  bottom: 44px;
+}
+
+.below {
+  top: 44px;
+}
+
+.leader {
+  position: absolute;
+  left: -1px;
+  width: 1px;
+  height: 44px;
+  background: var(--line);
+}
+
+.above .leader {
+  bottom: -45px;
+}
+
+.below .leader {
+  top: -45px;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.org,
+.dates {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Phone, and any reader who asked for less motion: a vertical strip, no pin. */
+@media (max-width: 720px), (prefers-reduced-motion: reduce) {
+  .stage {
+    height: auto;
+    min-height: 0;
+    padding: 72px var(--gutter) 56px;
+  }
+
+  .word {
+    position: static;
+    margin-bottom: 32px;
+    font-size: clamp(84px, 24vw, 110px);
+  }
+
+  .strip {
+    position: static;
+    padding: 0;
+  }
+
+  .track {
+    position: static;
+    width: auto;
+    height: auto;
+    will-change: auto;
+    transform: none !important;
+  }
+
+  .axis,
+  .year {
+    display: none;
+  }
+
+  /* A contact-sheet list beside the hairline: rows, not boxes. */
+  .frames {
+    display: grid;
+    padding-left: 20px;
+    border-left: 1px solid var(--line);
+  }
+
+  .frame,
+  .above,
+  .below {
+    position: static;
+    width: auto;
+    padding: 14px 0 16px;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .frame:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .leader {
+    display: none;
+  }
+}
+
+@media (min-width: 721px) and (prefers-reduced-motion: reduce) {
+  .word {
+    font-size: clamp(96px, 13vw, 200px);
+  }
+}
