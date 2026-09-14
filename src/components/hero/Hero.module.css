@@ -1,0 +1,262 @@
+.stage {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--bg);
+}
+
+/* The print develops once: from near-black to its true tones. */
+.photo {
+  object-fit: cover;
+  object-position: right center;
+  z-index: 0;
+  animation: develop 1.6s var(--ease-out) both;
+}
+
+@keyframes develop {
+  from {
+    filter: brightness(0.05) contrast(1.6);
+  }
+  to {
+    filter: brightness(1) contrast(1);
+  }
+}
+
+.veil {
+  /* Desktop: nothing. The darkness is burned into the print itself. */
+  display: none;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 28px var(--gutter);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.nav ul {
+  display: flex;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav a {
+  color: var(--mute);
+  text-decoration: none;
+  transition: color 0.2s var(--ease-out);
+}
+
+.nav a:hover {
+  color: #fff;
+}
+
+.mark {
+  color: var(--ink) !important;
+  font-weight: 500;
+  justify-self: start;
+}
+
+.talk {
+  justify-self: end;
+  visibility: hidden; /* desktop: Talk already sits in the stage list */
+}
+
+.copy {
+  position: absolute;
+  z-index: 3;
+  left: var(--gutter);
+  bottom: 64px;
+  display: grid;
+  gap: 22px;
+  animation: settle 1.6s var(--ease-out) both;
+}
+
+@keyframes settle {
+  from {
+    transform: translateY(24px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.descriptor {
+  margin: 0;
+  max-width: 46ch;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+  text-wrap: pretty;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(96px, 13vw, 200px);
+  line-height: 0.9;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.name span {
+  display: block;
+}
+
+.hash a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+}
+
+.hash a:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.hash {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 64px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Leader line from the annotation to the stage edge. */
+.hash::after {
+  content: "";
+  width: var(--gutter);
+  height: 1px;
+  background: var(--line);
+}
+
+.version {
+  color: var(--mute);
+}
+
+.cue {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 0;
+  width: 44px;
+  height: 72px;
+  translate: -50% 0;
+  display: grid;
+  justify-items: center;
+  align-items: end;
+}
+
+.cue span {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, transparent, var(--ink));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo,
+  .copy {
+    animation: none;
+  }
+  .nav a {
+    transition: none;
+  }
+}
+
+@media (max-width: 720px) {
+  /* Portrait crop: the photo is a band across the top; the words sit on
+     solid ground below it so the gesture is never covered. */
+  .photo {
+    object-position: 78% 0;
+    bottom: auto !important;
+    height: 66svh !important;
+  }
+
+  .veil {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    bottom: auto;
+    height: 66svh;
+    background: linear-gradient(
+      180deg,
+      rgba(11, 11, 11, 0) 55%,
+      rgba(11, 11, 11, 1) 100%
+    );
+  }
+
+  .nav {
+    grid-template-columns: auto 1fr auto;
+    padding-top: 20px;
+  }
+
+  .nav nav {
+    display: none;
+  }
+
+  .talk {
+    visibility: visible;
+  }
+
+  .copy {
+    bottom: 76px;
+    right: var(--gutter);
+    gap: 16px;
+  }
+
+  .name {
+    font-size: clamp(84px, 24vw, 110px);
+  }
+
+  .hash {
+    right: auto;
+    left: var(--gutter);
+    bottom: 28px;
+  }
+
+  .hash::after {
+    display: none;
+  }
+
+  .cue {
+    display: none;
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "title": "Elige el mundo visual del portafolio",
+  "question": "El sorteo asignó El Dossier Redactado, traducido a tu mundo fijado (blanco y negro, retrato, palabra gigante). Quédatelo, toma la elección propia, un retador, o vuelve a tirar.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "El Dossier Redactado",
+      "kicker": "THE ROLL",
+      "lineage": "expedientes desclasificados con barras de censura",
+      "thesis": "Demostrar sin revelar, literal: cada dato del sitio nace tapado por una barra y se desclasifica cuando tú lo decides.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86", "#262624"],
+      "materials": ["copia al gelatino de plata", "barra de redacción", "sello mono de expediente"],
+      "viewport": "Retrato B/N a sangre por la derecha, fondo negro con viñeta. Izquierda: DAVID ZAPATA en condensada gigante a dos líneas; sobre el nombre, una línea mono 'Blockchain developer · ZK · privacy'. Cada bloque de texto entra como una barra de redacción que se retira (clip-path), no como un fade. Abajo a la derecha, un número de expediente en mono con el hash del commit. Nav entre corchetes arriba. El gesto del dedo nunca queda tapado.",
+      "risk": "Si las barras se usan en todo, cansa y parece un truco; se reserva a la entrada de cada etapa y al hover de lo verificable.",
+      "raised": [
+        {"from": "challenger-depot", "raise": "Las etapas no se deslizan: cada una encaja bajo la misma ventana con un paso, un pequeño rebote y asiento. En móvil se pierden filas, nunca se encoge la tipografía."},
+        {"from": "challenger-opart", "raise": "Un solo campo generativo de grano en Canvas que se regenera a cualquier ancho sin costura; la textura es una, no una imagen repetida."},
+        {"from": "challenger-civic", "raise": "Una sola familia tipográfica de cuerpo en dos pesos; el peso de la página lo lleva la condensada y nada más."},
+        {"from": "challenger-tensegrity", "raise": "Las anotaciones (hash, versión, ubicación) van en mono ancladas a lo que anotan con una línea guía, no flotando en esquinas."},
+        {"from": "challenger-drum", "raise": "Una luz de posición siempre visible: la barra de progreso de etapas dice dónde está 'ahora' en todo momento."},
+        {"from": "challenger-clay", "raise": "Cada etapa deja marca ascendente en el índice: el recorrido se lee como una construcción, no como slides sueltos."}
+      ],
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "nav [ BUILD ] [ SHIP ] [ PROVE ] [ LIVE ] [ TALK ]", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "retrato B/N a sangre", "x": 6, "y": 1, "w": 6, "h": 7, "accent": true},
+        {"label": "línea mono: blockchain dev · ZK · privacy", "x": 0, "y": 3, "w": 5, "h": 1},
+        {"label": "DAVID ZAPATA condensada gigante (barra que se retira)", "x": 0, "y": 4, "w": 6, "h": 3},
+        {"label": "expediente · hash", "x": 9, "y": 7, "w": 3, "h": 1}
+      ]}
+    },
+    {
+      "id": "model-pick",
+      "label": "La Copia de Cámara Oscura",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "retrato en clave baja de Lindbergh, Nagel y Righetti",
+      "thesis": "Una sola persona, una sola palabra, todo lo demás oscuridad y grano.",
+      "palette": ["#000000", "#ffffff", "#9a9a9a"],
+      "materials": ["copia al gelatino de plata", "tipo de madera condensada", "grano"],
+      "viewport": "El mismo hero que la maqueta A: retrato a la derecha, nombre gigante a la izquierda, línea mono, hash. Entrada por fundido y desplazamiento suave; ningún dispositivo narrativo extra.",
+      "risk": "Es literalmente lo que ya son tus referencias; se distingue solo por la ejecución y por el contenido ZK. También es donde aterrizan casi todos los portafolios oscuros.",
+      "wireframe": {"cols": 12, "rows": 8, "regions": [
+        {"label": "nav", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "retrato B/N", "x": 6, "y": 1, "w": 6, "h": 7, "accent": true},
+        {"label": "DAVID ZAPATA", "x": 0, "y": 4, "w": 6, "h": 3},
+        {"label": "línea mono", "x": 0, "y": 3, "w": 5, "h": 1}
+      ]}
+    },
+    {
+      "id": "challenger-depot",
+      "label": "Cortina de Destinos de Cochera",
+      "verdict": "competitive",
+      "lineage": "rollos de tela de destino de autobús, iluminados por detrás",
+      "thesis": "El contenido es un rollo de cursos de tela que pasan bajo una única ventana fija.",
+      "palette": ["#0b0b0b", "#efede8", "#8f8d86"],
+      "materials": ["loneta teñida", "ojal troquelado", "luz trasera"],
+      "viewport": "Una ventana fija con tu nombre en condensada en mayúsculas; cada etapa entra con un paso seco, rebote y asiento; el índice es una cinta de ojales lateral.",
+      "case": "Gana en claridad: su mecánica es exactamente tu recorrido por etapas. Pierde en identificación: una cochera no es el mundo cripto. Su disciplina de movimiento se donó a la dirección asignada.",
+      "risk": "En verde y amarillo es otra marca; en B/N pierde su razón de ser y queda solo la mecánica.",
+      "hero": "https://impeccable.style/worlds/cards/operate-c-depot-blind-courses-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/operate-c-depot-blind-courses.webp"
+    },
+    {
+      "id": "challenger-opart",
+      "label": "Repetición Textil Op-Art",
+      "verdict": "competitive",
+      "lineage": "estampado textil de onda blanco y negro sin costura visible",
+      "thesis": "Un campo generativo B/N puro en el que el ojo nunca encuentra dónde se repite.",
+      "palette": ["#000000", "#ffffff"],
+      "materials": ["tinta negra sobre tela mate", "onda generativa"],
+      "viewport": "Toda la pantalla es una onda B/N que respira; el nombre y el retrato flotan sobre ella y la onda sube de amplitud donde está el cursor.",
+      "case": "Gana en identificación: negro y blanco sin gris, generativo, cerca del ruido de Ikeda que ya te gusta. Pierde en claridad: el campo compite con el retrato y el gesto. Su disciplina (campo generativo sin costura) se donó como textura de grano.",
+      "risk": "Fatiga visual real si la amplitud no se domestica; puede tapar la foto.",
+      "hero": "https://impeccable.style/worlds/cards/design-canon-op-art-textile-repeat-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/design-canon-op-art-textile-repeat.webp"
+    },
+    {
+      "id": "challenger-civic",
+      "label": "Prospecto de Oficina Cívica",
+      "verdict": "declined",
+      "lineage": "prospecto corporativo tardo-moderno",
+      "thesis": "Todo blanco hueso y una sola cinta de luz violeta.",
+      "palette": ["#f7f7fa", "#1b1547", "#6b5ce7"],
+      "materials": ["cinta WebGL", "hairline"],
+      "viewport": "Texto a la izquierda, cinta de luz a la derecha.",
+      "case": "Contradice el blanco y negro fijado y no es tu audiencia.",
+      "kept": "Una familia, dos pesos: el argumento lo lleva el tipo.",
+      "risk": "Corporativo.",
+      "hero": "https://impeccable.style/worlds/cards/civic-bureau-prospectus-late-modern-hero.webp"
+    },
+    {
+      "id": "challenger-tensegrity",
+      "label": "Columna de Tensegridad",
+      "verdict": "declined",
+      "lineage": "escultura cinética de varillas y cuerda",
+      "thesis": "Fuerzas opuestas que hacen respirar un cuerpo rígido.",
+      "palette": ["#111111", "#d9d9d6", "#c8102e"],
+      "materials": ["carbono mate", "cuerda roja"],
+      "viewport": "Una columna que respira con etiquetas de fuerza en mono.",
+      "case": "Acento rojo y metáfora de ingeniería ajenos al brief.",
+      "kept": "Anotaciones en mono ancladas con línea guía a lo que anotan.",
+      "risk": "Ilustrativo.",
+      "hero": "https://impeccable.style/worlds/cards/kinetic-sculpture-automata-tensegrity-breathing-column-hero.webp"
+    },
+    {
+      "id": "challenger-clay",
+      "label": "Torre de Barro Enrollado",
+      "verdict": "declined",
+      "lineage": "cerámica monumental por rollos",
+      "thesis": "Un registro ascendente de presión y secado.",
+      "palette": ["#9a4b2f", "#5a3a2a", "#efe6da"],
+      "materials": ["terracota", "engobe"],
+      "viewport": "Cursos horizontales de barro.",
+      "case": "Terracota y umber contradicen el B/N; identificación nula.",
+      "kept": "Cada etapa deja una marca visible en el índice del recorrido.",
+      "risk": "Ajeno.",
+      "hero": "https://impeccable.style/worlds/cards/clay-ceramics-fracture-coiled-earth-tower-hero.webp"
+    },
+    {
+      "id": "challenger-drum",
+      "label": "Fila de Pasos de Caja de Ritmos",
+      "verdict": "declined",
+      "lineage": "caja de ritmos de principios de los 80",
+      "thesis": "Dieciséis teclas y una luz que persigue el compás.",
+      "palette": ["#1c1c1c", "#e63b2e", "#f5a623", "#f2e14c"],
+      "materials": ["panel carbón", "LED"],
+      "viewport": "Una fila de pasos que nunca se rompe.",
+      "case": "Cuatro colores de caramelo; nada que ver con ZK.",
+      "kept": "La luz de posición: siempre se ve dónde está 'ahora'.",
+      "risk": "Juguete.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-drum-machine-step-row-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code", "toggle": false},
+  "canon": true,
+  "canonCard": {
+    "label": "El estándar de la categoría",
+    "thesis": "El portafolio oscuro de developer que todos hacen, ejecutado sin fallos.",
+    "palette": ["#0a0a0a", "#ededed", "#3b82f6"],
+    "materials": ["rejilla limpia", "tarjetas de proyecto", "Inter"],
+    "viewport": "Nombre y cargo centrados, botón, y debajo una rejilla de tarjetas de proyectos.",
+    "risk": "Indistinguible de la competencia por diseño."
+  },
+  "steer": true
+}
