@@ -41,7 +41,7 @@ export const roles: Role[] = [
   },
   {
     slug: "ultravioleta",
-    title: "Web3 Community Builder",
+    title: "Developer Contributor",
     org: "UltravioletaDAO",
     kind: "community",
     start: "2023",
@@ -53,7 +53,7 @@ export const roles: Role[] = [
     org: "Pontificia Universidad Javeriana Cali",
     kind: "university",
     start: "2025",
-    end: "2026",
+    end: "present",
     place: "Cali",
   },
   {

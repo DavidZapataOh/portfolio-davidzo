@@ -40,7 +40,7 @@ Secondary differentiator: David teaches (university chair, workshops, community 
 **Content, confirmed:**
 
 - Projects (Build), in this order, all live: Raffero (raffero.com, private raffles with ZK proofs on Avalanche) · Glemo (glemo.io, issue and verify digital credentials, REST API) · Strickle (strickle.vercel.app, ZK compliance for EU battery passport, Regulation 2023/1542) · Sincerin (sincerin.com, confidential payments rollup on Stellar, early stage; landing is a single line).
-- Experience (Ship), ordered by weight: CTO, Buckspay, 2025–2026 · Technical Contributor, Avalanche Team1, 2024–present · Blockchain Developer, freelance, 2022–present · Web3 Community Builder, UltravioletaDAO, 2023–2025 · Profesor de cátedra, Pontificia Universidad Javeriana Cali, 2025–2026 · Full Stack Developer, freelance, 2019–2022.
+- Experience (Ship), ordered by weight: CTO, Buckspay, 2025–2026 · Technical Contributor, Avalanche Team1, 2024–present · Blockchain Developer, freelance, 2022–present · Developer Contributor, UltravioletaDAO, 2023–2025 · Profesor de cátedra, Pontificia Universidad Javeriana Cali, 2025–present · Full Stack Developer, freelance, 2019–2022.
 - Prove: hackathons won, classes and talks given, certificates. Rule agreed: the teaching role lives in Ship; the courses themselves are objects in Prove. Same rule for founder roles: role in Ship, product in Build.
 - Live: football, travel, mathematics, nature. Mathematics is the honest bridge to ZK.
 - Talk: email as primary action; GitHub, X, LinkedIn, Instagram. A PGP fingerprint or ENS is welcome and coherent with the privacy positioning.
