@@ -99,7 +99,7 @@
       },
       "data": {
         "displayName": "Data (Mono 12, tabular)",
-        "purpose": "Commit hash and version. Sentence case, tabular numerals."
+        "purpose": "Reserved for data and measurements in later stages. Sentence case, tabular numerals."
       }
     },
     "shadows": [],
@@ -126,7 +126,11 @@
       }
     ],
     "breakpoints": [
-      { "name": "mobile", "value": "720px", "purpose": "max-width: portrait band crop, nav collapses to DZ + [ Talk ], leader and scroll cue hidden." }
+      {
+        "name": "mobile",
+        "value": "720px",
+        "purpose": "max-width: portrait band crop, nav collapses to DZ + [ Talk ], leader and scroll cue hidden."
+      }
     ],
     "material": {
       "grain": {
@@ -173,7 +177,7 @@
       "kind": "custom",
       "refersTo": "descriptor",
       "description": "The one mono sentence above the stage word.",
-      "html": "<p class=\"ds-descriptor\">Blockchain developer · ZK · privacy. I build systems that prove without revealing. Cali, Colombia.</p>",
+      "html": "<p class=\"ds-descriptor\">Blockchain developer \u00b7 ZK \u00b7 privacy. I build systems that prove without revealing. Cali, Colombia.</p>",
       "css": ".ds-descriptor { margin: 0; max-width: 46ch; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-weight: 400; font-size: 13px; line-height: 1.7; letter-spacing: 0.08em; color: var(--mute, #8f8d86); text-wrap: pretty; }"
     },
     {
@@ -185,51 +189,59 @@
       "css": ".ds-name { margin: 0; font-family: var(--font-display, Anton, Impact, sans-serif); font-weight: 400; font-size: clamp(96px, 13vw, 200px); line-height: 0.9; letter-spacing: 0.005em; color: var(--ink, #efede8); text-wrap: balance; } .ds-name span { display: block; }"
     },
     {
-      "name": "Commit Hash with Leader",
-      "kind": "custom",
-      "refersTo": "hash-link",
-      "description": "0x<sha> and version in mono, hairline underline when linked, 1px leader of gutter length to the stage edge.",
-      "html": "<p class=\"ds-hash\"><a href=\"#\">0x02c44f5</a><span class=\"ds-hash-version\">v0.1</span></p>",
-      "css": ".ds-hash { margin: 0; display: flex; align-items: center; gap: 12px; font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace); font-size: 12px; letter-spacing: 0.08em; color: var(--mute, #8f8d86); font-variant-numeric: tabular-nums; } .ds-hash a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line, #262624); transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-hash a:hover { color: #fff; border-color: #fff; } .ds-hash a:focus-visible { outline: 1px solid var(--ink, #efede8); outline-offset: 4px; } .ds-hash::after { content: ''; width: clamp(20px, 4vw, 48px); height: 1px; background: var(--line, #262624); } .ds-hash-version { color: var(--mute, #8f8d86); }"
-    },
-    {
       "name": "Scroll Cue",
       "kind": "custom",
       "refersTo": "scroll-cue",
       "description": "44x72 hit area with a 1px line fading from transparent to ink; links to the next stage.",
       "html": "<a class=\"ds-cue\" href=\"#build\" aria-label=\"Scroll to the next stage\"><span aria-hidden=\"true\"></span></a>",
       "css": ".ds-cue { display: grid; justify-items: center; align-items: end; width: 44px; height: 72px; } .ds-cue span { width: 1px; height: 56px; background: linear-gradient(to bottom, transparent, var(--ink, #efede8)); } .ds-cue:focus-visible { outline: 1px solid var(--ink, #efede8); outline-offset: 4px; }"
-    },
-    {
-      "name": "Hairline Rule",
-      "kind": "custom",
-      "refersTo": "hash-link",
-      "description": "The only separator in the world: a 1px line in the hairline colour.",
-      "html": "<hr class=\"ds-hairline\" />",
-      "css": ".ds-hairline { border: 0; height: 1px; margin: 0; background: var(--line, #262624); }"
     }
   ],
   "narrative": {
-    "northStar": "La Copia de Cámara Oscura (The Darkroom Print)",
-    "overview": "The site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption; a real commit hash is the proof that the print was made. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.\n\nDensity is extremely low and deliberate. A stage is a single viewport with a handful of elements, each anchored to an edge or a gutter, and large areas of ground left empty on purpose. Type does the work of hierarchy: a condensed heavy display face at poster scale against small, widely tracked monospace annotations. Body text in Archivo is loaded and reserved but has not yet appeared on a surface; the first stage is entirely display and mono.\n\nMotion is a single event. On load the print \"develops\" once (1.6s, exponential ease-out) from near-black to its true tones while the caption settles into place; after that nothing moves except a 200ms colour step on hover. The resting state is complete without JavaScript and is shown immediately under prefers-reduced-motion. The product commits to six stages, one word each (Hero, Build, Ship, Prove, Live, Talk); every later stage inherits this world rather than opening a new one.",
+    "northStar": "La Copia de C\u00e1mara Oscura (The Darkroom Print)",
+    "overview": "The site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.\n\nDensity is extremely low and deliberate. A stage is a single viewport with a handful of elements, each anchored to an edge or a gutter, and large areas of ground left empty on purpose. Type does the work of hierarchy: a condensed heavy display face at poster scale against small, widely tracked monospace annotations. Body text in Archivo is loaded and reserved but has not yet appeared on a surface; the first stage is entirely display and mono.\n\nMotion is a single event. On load the print \"develops\" once (1.6s, exponential ease-out) from near-black to its true tones while the caption settles into place; after that nothing moves except a 200ms colour step on hover. The resting state is complete without JavaScript and is shown immediately under prefers-reduced-motion. The product commits to six stages, one word each (Hero, Build, Ship, Prove, Live, Talk); every later stage inherits this world rather than opening a new one.",
     "keyCharacteristics": [
       "Black and white only; no color accent exists in the token set.",
       "One dark ground, one ink, one grey, one hairline; nothing in between.",
-      "Poster-scale condensed display name against 12–13px tracked monospace annotations.",
+      "Poster-scale condensed display name against 12\u201313px tracked monospace annotations.",
       "Flat: no shadows, no CSS vignette on desktop, no radius; edges are the composition.",
       "Generated grain over the whole stage (mix-blend-mode: overlay, opacity 0.14).",
       "One load animation (\"develop\"), then stillness."
     ],
     "rules": [
-      { "name": "The No-Accent Rule", "body": "There is no fifth colour. Emphasis is produced by scale (display vs mono), by value (ink vs mute), or by state (mute → pure white), never by hue.", "section": "colors" },
-      { "name": "The Burned-In Rule", "body": "Darkness belongs to the photograph. Grading, vignette and the desktop left-field fade live in the raster; CSS carries no gradient on desktop. The one CSS fade (the mobile foot veil, linear-gradient(180deg, transparent 55%, ground 100%)) exists only where the portrait crop must land on solid ground.", "section": "colors" },
-      { "name": "The One Word Rule", "body": "Each stage owns exactly one display-scale word; everything else on the stage is 12–13px monospace. A stage with two display-scale elements has broken the world.", "section": "typography" },
-      { "name": "The Uppercase-Is-Nav Rule", "body": "Uppercase with 0.14em tracking is the navigation voice only. The descriptor and data lines stay in sentence case at 0.08em.", "section": "typography" },
-      { "name": "The Flat Print Rule", "body": "No box-shadow, no backdrop-filter, no glass, no elevation states. If an element needs separation, it gets a 1px hairline ({colors.line}) or more empty ground, never a shadow.", "section": "elevation" },
-      { "name": "The Grain Is Material Rule", "body": "The grain is one static field over the whole stage, regenerated only on resize. It is never animated, never tiled per element, and never applied to text alone.", "section": "elevation" }
+      {
+        "name": "The No-Accent Rule",
+        "body": "There is no fifth colour. Emphasis is produced by scale (display vs mono), by value (ink vs mute), or by state (mute \u2192 pure white), never by hue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Burned-In Rule",
+        "body": "Darkness belongs to the photograph. Grading, vignette and the desktop left-field fade live in the raster; CSS carries no gradient on desktop. The one CSS fade (the mobile foot veil, linear-gradient(180deg, transparent 55%, ground 100%)) exists only where the portrait crop must land on solid ground.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Word Rule",
+        "body": "Each stage owns exactly one display-scale word; everything else on the stage is 12\u201313px monospace. A stage with two display-scale elements has broken the world.",
+        "section": "typography"
+      },
+      {
+        "name": "The Uppercase-Is-Nav Rule",
+        "body": "Uppercase with 0.14em tracking is the navigation voice only. The descriptor and data lines stay in sentence case at 0.08em.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Print Rule",
+        "body": "No box-shadow, no backdrop-filter, no glass, no elevation states. If an element needs separation, it gets a 1px hairline ({colors.line}) or more empty ground, never a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Grain Is Material Rule",
+        "body": "The grain is one static field over the whole stage, regenerated only on resize. It is never animated, never tiled per element, and never applied to text alone.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do keep every stage to one display-scale word in Anton and 12–13px JetBrains Mono for everything else.",
+      "Do keep every stage to one display-scale word in Anton and 12\u201313px JetBrains Mono for everything else.",
       "Do anchor elements to edges and the gutter (clamp(20px, 4vw, 48px)); leave the rest of the stage as ground.",
       "Do use {colors.mute} for every secondary voice and {colors.line} for every 1px rule; use pure white only as a hover state.",
       "Do put darkness into the raster (burn edges to #0b0b0b in the asset) and keep the grain canvas over the whole stage at opacity 0.14 with overlay blending.",
@@ -241,7 +253,7 @@
       "Don't use box-shadow, backdrop-filter, glass, or CSS gradients on desktop; the only permitted gradient is the mobile foot veil and the 1px scroll cue.",
       "Don't round any corner or draw any box around a control.",
       "Don't cover the finger-on-lips gesture with text at any breakpoint.",
-      "Don't uppercase anything except navigation labels, and never track the descriptor or hash beyond 0.08em.",
+      "Don't uppercase anything except navigation labels, and never track the descriptor beyond 0.08em.",
       "Don't animate anything after load except the 200ms hover colour step; the grain never moves."
     ]
   }

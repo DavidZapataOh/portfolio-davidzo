@@ -10,7 +10,7 @@ const STAGES = [
   { id: "talk", label: "Talk" },
 ] as const;
 
-export default function Hero({ sha, repo }: { sha: string; repo?: string }) {
+export default function Hero() {
   return (
     <section className={styles.stage} aria-labelledby="hero-name">
       <Image
@@ -45,25 +45,15 @@ export default function Hero({ sha, repo }: { sha: string; repo?: string }) {
 
       <div className={styles.copy}>
         <p className={styles.descriptor}>
-          Blockchain developer · ZK · privacy. I&nbsp;build systems that prove
-          without revealing. Cali, Colombia.
+          Blockchain developer · ZK · privacy.
+          <br />
+          I&nbsp;build systems that prove without revealing.
         </p>
         <h1 id="hero-name" className={styles.name}>
           <span>David</span>
           <span>Zapata</span>
         </h1>
       </div>
-
-      <p className={styles.hash}>
-        {repo ? (
-          <a href={`${repo}/commit/${sha}`} rel="noopener">
-            0x{sha}
-          </a>
-        ) : (
-          <span>0x{sha}</span>
-        )}
-        <span className={styles.version}>v0.1</span>
-      </p>
 
       <a href="#build" className={styles.cue} aria-label="Scroll to the next stage">
         <span aria-hidden="true" />

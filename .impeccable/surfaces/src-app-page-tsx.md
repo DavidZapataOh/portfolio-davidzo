@@ -36,8 +36,9 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 - The descriptor sits at ~47% of the viewport height, not ~30%: the block is bottom-anchored under a two-line name at 13vw, which pushes it down. Kept.
 - The hash's leader line runs horizontally to the right edge at the hash's own height, not diagonally to the corner. Kept; it is a hairline (#262624) by design.
 - The photograph shipped in `public/hero.jpg` is a graded copy of the user's original (`/home/david/portfolio/hero.jpg`): the left field and the frame edges are burned to #0b0b0b in the asset, so the stage has no CSS gradient on desktop. The mobile foot fade remains CSS.
-- The commit hash links to `${NEXT_PUBLIC_REPO_URL}/commit/<sha>` when that env var is set; until the public repo exists it renders as plain text.
+- The commit hash and its leader line were removed on 2026-09-13 at the user's request ("innecesario"). The FIRST VIEWPORT block's lower-right annotation no longer exists; the proof-of-build idea may return in a later stage.
+- "Cali, Colombia" was removed from the descriptor at the user's request; the line now reads "Blockchain developer · ZK · privacy. I build systems that prove without revealing."
 
 ## Unresolved
 
-Deploy target for davidzo.com (domain owned since 2026-09-13); exact wording of the descriptor line (English, one sentence); whether the hash reads from Vercel's env or from git at build time (both supported); public repository URL for the commit link (`NEXT_PUBLIC_REPO_URL`).
+Deploy target for davidzo.com (domain owned since 2026-09-13); exact wording of the descriptor line (English, one sentence);

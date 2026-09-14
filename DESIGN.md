@@ -37,7 +37,6 @@ rounded:
   none: "0px"
 spacing:
   gutter: "clamp(20px, 4vw, 48px)"
-  hairline-gap: "12px"
   stack: "22px"
   chrome: "28px"
   baseline: "64px"
@@ -58,12 +57,6 @@ components:
   display-name:
     textColor: "{colors.ink}"
     typography: "{typography.display}"
-  hash-link:
-    textColor: "{colors.mute}"
-    typography: "{typography.data}"
-    rounded: "{rounded.none}"
-  hash-link-hover:
-    textColor: "{colors.white-hover}"
   scroll-cue:
     width: "44px"
     height: "72px"
@@ -75,7 +68,7 @@ components:
 
 **Creative North Star: "La Copia de Cámara Oscura" (The Darkroom Print)**
 
-The site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption; a real commit hash is the proof that the print was made. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.
+The site is a print pulled from a darkroom, not a web page with a photo on it. One person, one word, and everything else is darkness and grain. The photograph is the argument; the name is the caption. There is no color anywhere: the whole world lives between a near-black ground and a warm paper white, with a single grey for anything that speaks second and a hairline that is barely lighter than the ground. Depth comes from the photograph's own burned edges and a generated silver-gelatin grain, never from CSS gradients, glass, or shadows.
 
 Density is extremely low and deliberate. A stage is a single viewport with a handful of elements, each anchored to an edge or a gutter, and large areas of ground left empty on purpose. Type does the work of hierarchy: a condensed heavy display face at poster scale against small, widely tracked monospace annotations. Body text in Archivo is loaded and reserved but has not yet appeared on a surface; the first stage is entirely display and mono.
 
@@ -98,9 +91,9 @@ A monochrome darkroom palette: a near-black ground, a warm paper white for ink, 
 
 ### Neutral
 - **Darkroom Ground** (`{colors.ground}`): page and stage background, `theme-color`, scrollbar track, selection text, and the mobile foot fade (`rgba(11,11,11,0→1)`). The photograph's left field and frame edges are burned to this value in the asset itself, so ground and print are indistinguishable at the seams.
-- **Silver Grey / Mute** (`{colors.mute}`): every secondary voice: nav links at rest, the descriptor line, the commit hash and version. Contrast on ground is about 6:1, which clears WCAG AA at 12px mono.
-- **Hairline** (`{colors.line}`): 1px rules only: the hash underline, the leader line to the stage edge, the scrollbar thumb. Never a fill.
-- **Pure White (hover)** (`{colors.white-hover}`): appears only as the hover target for text links (nav, hash) and the hash's hover underline. It is a state, not a surface colour.
+- **Silver Grey / Mute** (`{colors.mute}`): every secondary voice: nav links at rest and the descriptor line. Contrast on ground is about 6:1, which clears WCAG AA at 12px mono.
+- **Hairline** (`{colors.line}`): 1px rules only: the scroll cue and the scrollbar thumb. Never a fill.
+- **Pure White (hover)** (`{colors.white-hover}`): appears only as the hover target for text links (nav). It is a state, not a surface colour.
 
 ### Named Rules
 **The No-Accent Rule.** There is no fifth colour. Emphasis is produced by scale (display vs mono), by value (ink vs mute), or by state (mute → pure white), never by hue.
@@ -119,7 +112,7 @@ A monochrome darkroom palette: a near-black ground, a warm paper white for ink, 
 - **Display** (Anton 400, `clamp(96px, 13vw, 200px)`, line-height 0.9, tracking 0.005em, `text-wrap: balance`): the stage word. In the Hero it is the name, always two lines (`David` / `Zapata`), each word a block. On mobile it steps to `clamp(84px, 24vw, 110px)`.
 - **Descriptor** (JetBrains Mono 400, 13px, line-height 1.7, tracking 0.08em, max 46ch, `text-wrap: pretty`, mute): the one sentence above the display word. Sentence case.
 - **Label** (JetBrains Mono, 12px, tracking 0.14em, uppercase): navigation and the `DZ` mark (mark at weight 500, ink). Uppercase is reserved for this role.
-- **Data** (JetBrains Mono 400, 12px, tracking 0.08em, tabular numerals, mute): the commit hash `0x<sha>` and version `v0.1`. Not uppercased.
+- **Data** (JetBrains Mono 400, 12px, tracking 0.08em, tabular numerals, mute): reserved for data and measurements in later stages (no element uses it in the Hero since the commit hash was removed on 2026-09-13). Not uppercased.
 - **Body** (Archivo 400/500): loaded on `<body>` as the default font; no size, leading or measure has been set on any surface yet. Do not invent a body ramp until a stage sets one.
 
 ### Named Rules
@@ -129,13 +122,13 @@ A monochrome darkroom palette: a near-black ground, a warm paper white for ink, 
 
 ## Layout
 
-The spatial model is a single full-height stage (`100svh`, min 560px, `overflow: hidden`, `isolation: isolate`) with elements pinned to its edges rather than flowed. There is no container width or column grid; the only horizontal measure is the gutter, `clamp(20px, 4vw, 48px)`, used as left inset for the copy block, the nav padding, and the length of the hash's leader line.
+The spatial model is a single full-height stage (`100svh`, min 560px, `overflow: hidden`, `isolation: isolate`) with elements pinned to its edges rather than flowed. There is no container width or column grid; the only horizontal measure is the gutter, `clamp(20px, 4vw, 48px)`, used as left inset for the copy block and the nav padding.
 
-Desktop (above 720px): the photograph fills the stage with `object-fit: cover`, `object-position: right center`, the face in the right third and the left ~55% burned to ground. Nav sits at the top in a three-column grid (`1fr auto 1fr`): mark left, five bracketed links centred with a 22px gap, right column empty. The copy block (descriptor over name, 22px gap) is absolutely anchored left at the gutter and 64px above the bottom edge; in the 1440 capture the descriptor lands at about 47% of the viewport height. The hash is anchored at the same 64px baseline on the right edge, followed by a 12px gap and a horizontal 1px leader of gutter length running to the stage edge. A 44×72px scroll cue sits bottom centre.
+Desktop (above 720px): the photograph fills the stage with `object-fit: cover`, `object-position: right center`, the face in the right third and the left ~55% burned to ground. Nav sits at the top in a three-column grid (`1fr auto 1fr`): mark left, five bracketed links centred with a 22px gap, right column empty. The copy block (descriptor over name, 22px gap) is absolutely anchored left at the gutter and 64px above the bottom edge; in the 1440 capture the descriptor lands at about 47% of the viewport height. A 44×72px scroll cue sits bottom centre.
 
-Mobile (720px and below, verified at 390px): the photograph becomes a 66svh band across the top (`object-position: 78% 0`) with a CSS veil fading its foot into ground from 55% to 100%. The copy block moves to 76px from the bottom with a 16px gap and is bounded by the gutter on both sides so the name wraps inside the viewport. The hash moves to bottom-left at 28px; its leader line and the scroll cue disappear. Nav becomes `DZ` left and `[ Talk ]` right (nav padding-top 20px); the five stage links are hidden.
+Mobile (720px and below, verified at 390px): the photograph becomes a 66svh band across the top (`object-position: 78% 0`) with a CSS veil fading its foot into ground from 55% to 100%. The copy block moves to 76px from the bottom with a 16px gap and is bounded by the gutter on both sides so the name wraps inside the viewport. The scroll cue disappears. Nav becomes `DZ` left and `[ Talk ]` right (nav padding-top 20px); the five stage links are hidden.
 
-Spacing rhythm as used: 12 (hairline gap) · 16 (mobile stack) · 20 (mobile chrome) · 22 (stack, nav gap) · 28 (chrome, mobile hash baseline) · 64 (desktop baseline) · 76 (mobile baseline). Vertical chrome is 28px on desktop; the gutter governs everything horizontal.
+Spacing rhythm as used: 16 (mobile stack) · 20 (mobile chrome) · 22 (stack, nav gap) · 28 (chrome) · 64 (desktop baseline) · 76 (mobile baseline). Vertical chrome is 28px on desktop; the gutter governs everything horizontal.
 
 Product rule inherited by later stages: each stage must work as a single viewport moment; detail expands within the pinned stage or in an overlay rather than breaking the journey.
 
@@ -150,7 +143,7 @@ This system uses no shadows and no tonal layering. Depth is photographic: the gr
 
 ## Shapes
 
-Everything is square. No border radius exists anywhere (`rounded.none` = 0px); edges are the viewport, the gutter, and the photograph's burned frame. The only strokes are 1px hairlines: the hash underline (`border-bottom`), the leader line (`::after`, 1px high, gutter wide), the scroll cue (1px wide, 56px tall, transparent→ink gradient), and the focus outline (1px ink, offset 4px). Controls have no boxes at all; brackets typed as text (`[ Build ]`) are the affordance.
+Everything is square. No border radius exists anywhere (`rounded.none` = 0px); edges are the viewport, the gutter, and the photograph's burned frame. The only strokes are 1px hairlines: the scroll cue (1px wide, 56px tall, transparent→ink gradient), and the focus outline (1px ink, offset 4px). Controls have no boxes at all; brackets typed as text (`[ Build ]`) are the affordance.
 
 ## Components
 
@@ -165,15 +158,13 @@ The Hero stage has no buttons, cards, inputs, or chips. Its vocabulary is text l
 - **Mobile:** stage links hidden; `[ Talk ]` appears in the right column as the single working action (chosen over a `[ MENU ]` with nothing behind it).
 
 ### Text Links (Data)
-- **Style:** inherit colour (mute), no underline; the commit hash carries a 1px hairline `border-bottom` in `{colors.line}` when it links.
+- **Style:** inherit colour (mute), no underline.
 - **Hover:** text and hairline both step to pure white over 200ms.
 - **Numerals:** tabular.
 
 ### Display Name (signature)
 - The stage word set in Display, two lines, each word a block, ink, bottom-anchored at 64px above the stage edge on desktop. Preceded by the Descriptor at a 22px gap. The pair "settles" up 24px on load; that is the only motion the block ever has.
 
-### Commit Hash with Leader (signature)
-- `0x<sha>` and `v0.1` in Data, mute, 12px gap, anchored bottom-right at the same 64px baseline as the name. A 1px hairline of gutter length runs horizontally from the hash to the stage edge, tying the annotation to the frame. On mobile the leader is dropped and the hash sits bottom-left.
 
 ### Scroll Cue
 - A 44×72px hit area at bottom centre containing a 1px, 56px line fading from transparent to ink. Links to the next stage. Hidden on mobile.
@@ -196,5 +187,5 @@ The Hero stage has no buttons, cards, inputs, or chips. Its vocabulary is text l
 - **Don't** use `box-shadow`, `backdrop-filter`, glass, or CSS gradients on desktop; the only permitted gradient is the mobile foot veil and the 1px scroll cue.
 - **Don't** round any corner or draw any box around a control.
 - **Don't** cover the finger-on-lips gesture with text at any breakpoint.
-- **Don't** uppercase anything except navigation labels, and never track the descriptor or hash beyond 0.08em.
+- **Don't** uppercase anything except navigation labels, and never track the descriptor beyond 0.08em.
 - **Don't** animate anything after load except the 200ms hover colour step; the grain never moves.

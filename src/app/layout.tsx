@@ -27,7 +27,22 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://davidzo.com"),
   title: "David Zapata",
   description:
-    "Blockchain developer focused on zero-knowledge proofs and privacy. I build systems that prove without revealing. Cali, Colombia.",
+    "Blockchain developer focused on zero-knowledge proofs and privacy. I build systems that prove without revealing.",
+  openGraph: {
+    type: "website",
+    url: "https://davidzo.com",
+    siteName: "David Zapata",
+    title: "David Zapata",
+    description:
+      "Blockchain developer · ZK · privacy. I build systems that prove without revealing.",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "David Zapata",
+    description:
+      "Blockchain developer · ZK · privacy. I build systems that prove without revealing.",
+  },
 };
 
 export const viewport: Viewport = {

@@ -106,14 +106,13 @@
 
 .descriptor {
   margin: 0;
-  max-width: 46ch;
+  max-width: 54ch;
   font-family: var(--font-mono);
   font-weight: 400;
   font-size: 13px;
   line-height: 1.7;
   letter-spacing: 0.08em;
   color: var(--mute);
-  text-wrap: pretty;
 }
 
 .name {
@@ -129,46 +128,6 @@
 
 .name span {
   display: block;
-}
-
-.hash a {
-  color: inherit;
-  text-decoration: none;
-  border-bottom: 1px solid var(--line);
-  transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
-}
-
-.hash a:hover {
-  color: #fff;
-  border-color: #fff;
-}
-
-.hash {
-  position: absolute;
-  z-index: 3;
-  right: 0;
-  bottom: 64px;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--mute);
-  font-variant-numeric: tabular-nums;
-}
-
-/* Leader line from the annotation to the stage edge. */
-.hash::after {
-  content: "";
-  width: var(--gutter);
-  height: 1px;
-  background: var(--line);
-}
-
-.version {
-  color: var(--mute);
 }
 
 .cue {
@@ -244,16 +203,6 @@
 
   .name {
     font-size: clamp(84px, 24vw, 110px);
-  }
-
-  .hash {
-    right: auto;
-    left: var(--gutter);
-    bottom: 28px;
-  }
-
-  .hash::after {
-    display: none;
   }
 
   .cue {
